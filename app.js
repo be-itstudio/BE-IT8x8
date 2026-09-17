@@ -448,6 +448,7 @@
       <button class="cmpl-close" id="cmplClose">✕</button>
       <button class="cmpl-share" id="cmplShare">↑</button>
       <div class="cmpl-card" id="cmplCard">
+        <img class="cmpl-logo" src="logo.png" alt="BE-IT 8x8">
         <div class="cmpl-title">Day ${DAY_INDEX} complete</div>
         <div class="cmpl-sub">Choosing Transformation</div>
         ${quote ? `<div class="cmpl-quote">“${esc(quote)}”</div>` : ""}
