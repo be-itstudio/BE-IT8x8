@@ -10,9 +10,9 @@ window.CONFIG = {
   SUPABASE_ANON_KEY: "sb_publishable_-y7zKOSsPu9fKEczVd6rYQ_4Farc6HZ",
 
   // --- CHALLENGE DATES (Sydney) ------------------------------------
-  START_DATE:  "2026-10-12",   // Mon — Day 1, ticking for points begins
+  START_DATE:  "2026-09-17",   // TEST MODE — was 2026-10-12, revert before real members join
   END_DATE:    "2026-12-05",   // Sat — Day 55, final day
-  LOCK_DATE:   "2026-10-11",   // Sun — becoming statement + chosen habits lock (no edits after)
+  LOCK_DATE:   "2026-09-16",   // TEST MODE — was 2026-10-11, revert before real members join
   TIMEZONE:    "Australia/Sydney",
   // Week 8 is a 6-day week (Mon 30 Nov – Sat 5 Dec); perfect-week bonus applies at 6/6.
 
