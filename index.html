@@ -35,7 +35,7 @@
   /* header */
   header{position:sticky; top:0; z-index:20; background:linear-gradient(#000 82%,transparent);
     padding:16px 16px 12px; display:flex; align-items:center; justify-content:center; gap:10px}
-  header img{height:48px; width:auto}
+  header img{height:64px; width:auto}
   header .adminlink{position:absolute; right:14px; top:16px; color:var(--faint); font-size:11px;
     text-transform:uppercase; letter-spacing:1px; background:none; border:0; cursor:pointer}
 
@@ -133,15 +133,15 @@
     color:var(--ink); cursor:pointer; margin:0 0 14px; appearance:none}
 
   /* day-complete card */
-  #view-complete{position:fixed; inset:0; z-index:200; background:#000; display:flex; align-items:center;
-    justify-content:center; padding:28px 20px}
+  #view-complete{position:fixed; inset:0; z-index:200; background:#000; overflow-y:auto; display:flex;
+    align-items:flex-start; justify-content:center; padding:70px 20px 40px}
   #view-complete.hide{display:none!important}
-  .cmpl-close,.cmpl-share{position:absolute; top:18px; width:38px; height:38px; border-radius:50%; border:1px solid var(--line2);
-    background:var(--panel2); color:var(--ink); display:grid; place-items:center; font-size:16px; cursor:pointer; padding:0}
+  .cmpl-close,.cmpl-share{position:fixed; top:18px; width:38px; height:38px; border-radius:50%; border:1px solid var(--line2);
+    background:var(--panel2); color:var(--ink); display:grid; place-items:center; font-size:16px; cursor:pointer; padding:0; z-index:201}
   .cmpl-close{left:18px} .cmpl-share{right:18px}
   .cmpl-card{max-width:420px; width:100%; text-align:center}
   .cmpl-title{font-family:var(--display); text-transform:uppercase; transform:skewX(-7deg); font-size:36px; line-height:1.05}
-  .cmpl-sub{font-family:var(--display); text-transform:uppercase; transform:skewX(-7deg); font-size:18px; color:var(--dim); margin-top:2px}
+  .cmpl-sub-img{width:66%; max-width:230px; margin:6px auto 0}
   .cmpl-quote{font-size:15px; line-height:1.55; color:var(--ink); font-weight:600; font-style:italic; margin:26px 0 4px; padding:0 10px}
   .cmpl-grid{display:flex; flex-direction:column; gap:7px; margin-top:26px; align-items:center}
   .cmpl-grid .wk{display:flex; gap:7px}

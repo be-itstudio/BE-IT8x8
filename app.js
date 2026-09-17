@@ -134,7 +134,7 @@
 
   function showFront(msg) {
     $("#view-gate").innerHTML = `<div class="center">
-      <img class="tl" src="tagline.png" alt="Choosing transformation">
+      <img class="tl" src="welcome.png" alt="BE-IT 8x8 — Choosing Transformation">
       ${msg ? `<div class="note warn" style="max-width:340px;margin-bottom:14px">${esc(msg)}</div>` : ""}
       <div class="card" style="max-width:340px; width:100%">
         <div class="kick sm">Welcome to 8x8</div>
@@ -449,7 +449,7 @@
       <button class="cmpl-share" id="cmplShare">↑</button>
       <div class="cmpl-card" id="cmplCard">
         <div class="cmpl-title">Day ${DAY_INDEX} complete</div>
-        <div class="cmpl-sub">Choosing Transformation</div>
+        <img class="cmpl-sub-img" src="tagline.png" alt="Choosing Transformation">
         ${quote ? `<div class="cmpl-quote">“${esc(quote)}”</div>` : ""}
         <div class="cmpl-grid">${completeGridHtml()}</div>
         <div class="cmpl-foot">${sc.streak ? sc.streak + " day streak 🔥 · " : ""}${sc.total} points</div>
