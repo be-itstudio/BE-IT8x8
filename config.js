@@ -53,6 +53,22 @@ window.CONFIG = {
   // --- THE WEEKLY BONUS -------------------------------------------
   DETOX_LABEL: "Socials detox — a full 24 hours off social media",
 
+  // --- DAY-COMPLETE CARD --------------------------------------------
+  // Shown when all 8 habits are ticked for the day. One picked per day, in order, looping.
+  COMPLETION_QUOTES: [
+    "This is a commitment to a better you.",
+    "Every action you take is a vote for who you want to become.",
+    "Backing your words with action.",
+    "This is who you said you'd be.",
+    "Doing it for future you.",
+    "Future you will thank you for choosing growth.",
+    "It's a choice, not a chore.",
+    "Keep choosing who you said you'd be.",
+    "Be the person that inspires others to grow too.",
+    "You are stacking the proof.",
+    "Every day you show up for you, you build something that can't be bought.",
+  ],
+
   // --- BECOMING STATEMENT -----------------------------------------
   // 3 member-chosen lines + 1 fixed line. Each dropdown also gets "Write my own".
   BECOMING_FIXED_LINE: "This is who I am. Not who I'm trying to be.",

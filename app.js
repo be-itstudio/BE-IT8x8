@@ -29,6 +29,8 @@
   const currentWeek = () => WEEKS.find(w => TODAY >= w.start && TODAY <= w.last) || null;
   const phase = TODAY < C.START_DATE ? "pre" : (TODAY > C.END_DATE ? "over" : "live");
   const HABIT_KEYS = ["macros", "water", "move", "read", "input", "c1", "c2", "c3"];
+  const DAY_INDEX = DAYS.indexOf(TODAY) + 1;                              // 1-based day-of-challenge, 0 if outside range
+  const TOTAL_DAYS = DAYS.length;
 
   // ---------- scoring ----------
   function score(daysMap, detoxSet) {
@@ -377,9 +379,12 @@
       ? `<div class="note warn" style="margin-bottom:12px">Challenge starts <b>Mon 12 Oct</b>. Read your statement daily — ticking for points opens on day one.</div>`
       : phase === "over"
         ? `<div class="note" style="margin-bottom:12px">Challenge complete. Final total below. 🖤</div>` : "";
+    const dayComplete = HABIT_KEYS.every(k => !!r[k]);
 
     $("#view-home").innerHTML = `<div class="wrap">
       ${banner}
+      ${phase === "live" ? `<div class="kick daycount">Day ${DAY_INDEX} / ${TOTAL_DAYS}</div>` : ""}
+      ${dayComplete ? `<button class="day-pill" id="viewCompleteBtn">✓ Day complete — view</button>` : ""}
       <div class="eyebrow">${phase === "live" ? nice(TODAY) : "Your becoming statement"}</div>
       <div class="card">${becomingHtml(ME)}</div>
 
@@ -395,6 +400,7 @@
       ${detox ? `<div class="divlab">This week</div>${detox}` : ""}
     </div>`;
     $("#view-home").querySelectorAll("[data-act]").forEach(bindHome);
+    if ($("#viewCompleteBtn")) $("#viewCompleteBtn").onclick = renderCompleteCard;
     show("home");
   }
   function updateHomeStats() {
@@ -410,7 +416,8 @@
       const f = node.dataset.f; const r = MY_DAYS[TODAY] || (MY_DAYS[TODAY] = { member_id: ME.id, date: TODAY });
       const nv = !r[f]; r[f] = nv; paintRow(node, nv); updateHomeStats();
       const ok = await api.tick(ME.id, TODAY, f, nv);
-      if (!ok) { r[f] = !nv; paintRow(node, !nv); updateHomeStats(); toast("⚠️ Not saved — check signal"); }
+      if (!ok) { r[f] = !nv; paintRow(node, !nv); updateHomeStats(); toast("⚠️ Not saved — check signal"); return; }
+      if (nv && HABIT_KEYS.every(k => !!r[k])) { renderCompleteCard(); renderHome(); }
     };
     if (act === "detox") node.onclick = async () => {
       const cw = currentWeek(); if (!cw) return;
@@ -420,6 +427,53 @@
       const ok = await api.setDetox(ME.id, cw.start, on);
       if (!ok) { if (on) MY_DETOX.delete(cw.start); else MY_DETOX.add(cw.start); paintRow(node, !on); updateHomeStats(); toast("⚠️ Not saved"); }
     };
+  }
+
+  // ================= DAY-COMPLETE CARD =================
+  function dayHabitCount(iso) { return HABIT_KEYS.reduce((a, k) => a + (MY_DAYS[iso] && MY_DAYS[iso][k] ? 1 : 0), 0); }
+  function dayStatus(iso) {
+    if (iso > TODAY) return "future";
+    const n = dayHabitCount(iso);
+    return n === 8 ? "perfect" : n > 0 ? "partial" : "missed";
+  }
+  function completeGridHtml() {
+    return WEEKS.map(w => `<div class="wk">${w.days.map(d =>
+      `<div class="d ${dayStatus(d)} ${d === TODAY ? "today" : ""}"></div>`).join("")}</div>`).join("");
+  }
+  function renderCompleteCard() {
+    const sc = score(MY_DAYS, MY_DETOX);
+    const quotes = C.COMPLETION_QUOTES || [];
+    const quote = quotes.length ? quotes[(DAY_INDEX - 1) % quotes.length] : "";
+    $("#view-complete").innerHTML = `
+      <button class="cmpl-close" id="cmplClose">✕</button>
+      <button class="cmpl-share" id="cmplShare">↑</button>
+      <div class="cmpl-card" id="cmplCard">
+        <div class="cmpl-title">Day ${DAY_INDEX} complete</div>
+        <div class="cmpl-sub">Choosing Transformation</div>
+        ${quote ? `<div class="cmpl-quote">“${esc(quote)}”</div>` : ""}
+        <div class="cmpl-grid">${completeGridHtml()}</div>
+        <div class="cmpl-foot">${sc.streak ? sc.streak + " day streak 🔥 · " : ""}${sc.total} points</div>
+      </div>`;
+    $("#view-complete").classList.remove("hide");
+    $("#cmplClose").onclick = () => $("#view-complete").classList.add("hide");
+    $("#cmplShare").onclick = shareCompleteCard;
+  }
+  async function shareCompleteCard() {
+    if (typeof html2canvas === "undefined") { toast("⚠️ Sharing unavailable — try a screenshot"); return; }
+    const node = $("#cmplCard");
+    let canvas;
+    try { canvas = await html2canvas(node, { backgroundColor: "#000000", scale: 2 }); }
+    catch (e) { toast("⚠️ Couldn't build image — try a screenshot"); return; }
+    canvas.toBlob(async blob => {
+      if (!blob) { toast("⚠️ Couldn't build image"); return; }
+      const file = new File([blob], "beit-8x8-day-" + DAY_INDEX + ".png", { type: "image/png" });
+      if (navigator.canShare && navigator.canShare({ files: [file] })) {
+        try { await navigator.share({ files: [file], title: "BE-IT 8x8" }); return; } catch (e) { /* user cancelled or unsupported, fall through */ }
+      }
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a"); a.href = url; a.download = file.name; a.click();
+      URL.revokeObjectURL(url);
+    }, "image/png");
   }
 
   // ================= LEADERBOARD =================
