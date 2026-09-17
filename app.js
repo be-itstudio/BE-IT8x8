@@ -449,7 +449,7 @@
       <button class="cmpl-share" id="cmplShare">↑</button>
       <div class="cmpl-card" id="cmplCard">
         <div class="cmpl-title">Day ${DAY_INDEX} complete</div>
-        <img class="cmpl-sub-img" src="tagline.png" alt="Choosing Transformation">
+        <div class="cmpl-sub">Choosing Transformation</div>
         ${quote ? `<div class="cmpl-quote">“${esc(quote)}”</div>` : ""}
         <div class="cmpl-grid">${completeGridHtml()}</div>
         <div class="cmpl-foot">${sc.streak ? sc.streak + " day streak 🔥 · " : ""}${sc.total} points</div>
