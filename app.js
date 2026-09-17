@@ -280,20 +280,28 @@
         <span class="lab">${esc(h)}</span>
         <span class="cb">${on ? "✓" : ""}</span></div>`;
     }).join("");
+    const fixedList = C.FIXED_HABITS.map(f => `<div class="hrow locked">
+        <span class="lab">${esc(f.label)}</span><span class="tag">everyone</span></div>`).join("");
     const ready = s.b1 && s.b2 && s.b3 && s.habits.length === 3;
     $("#view-setup").innerHTML = `<div class="wrap">
       <div class="eyebrow">First launch · one time</div>
-      <div class="kick">Your becoming<br>statement</div>
-      <p class="sub" style="margin:0 0 14px">Written now, read out loud every morning. It locks on Sun 11 Oct — no edits after.</p>
+      <div class="kick">Create your<br>becoming statement</div>
+      <p class="sub" style="margin:0 0 8px">This is the destination you're setting. You'll read it out loud every morning for 55 days — it's the GPS for who you're becoming.</p>
+      <p class="sub" style="margin:0 0 14px"><b>Don't pick what's comfortable. Pick who you are choosing to become.</b></p>
       <div class="card">
         ${lineBlock(1, C.BECOMING_LINE1)}
         ${lineBlock(2, C.BECOMING_LINE2)}
         ${lineBlock(3, C.BECOMING_LINE3)}
       </div>
       <div class="card">${preview}</div>
+      <p class="sub" style="margin:10px 0 0">It locks on Sun 11 Oct — no edits after.</p>
 
-      <div class="kick sm" style="margin-top:20px">Choose your 3 habits</div>
-      <p class="sub" style="margin:0 0 12px">Pick exactly three from the ten. These are yours for the eight weeks, on top of the five everyone does.</p>
+      <div class="kick sm" style="margin-top:24px">Choose your three</div>
+      <p class="sub" style="margin:0 0 8px">Everyone does the five. These three are your choice — daily, for eight weeks, locked the moment you submit.</p>
+      <p class="sub" style="margin:0 0 14px"><b>Choose the three that would change you. Not the three you could already tick today.</b></p>
+      <div class="divlab">The five everyone does</div>
+      ${fixedList}
+      <div class="divlab">Your three</div>
       ${habits}
       <div class="note ${s.habits.length === 3 ? "" : "warn"}" id="pickcount" style="margin:10px 0 16px">${s.habits.length}/3 chosen</div>
 

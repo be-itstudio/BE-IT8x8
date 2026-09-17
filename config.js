@@ -25,7 +25,7 @@ window.CONFIG = {
   OWNER_CODE: "beit8x8",    // unlock admin: members, links, edits, export
   JOIN_CODE:  "beit8x8",    // shared "door" code to start a self-onboarding signup
   ACTIVITY_LEVELS: ["Sedentary", "Lightly active", "Moderately active", "Very active", "Athlete"],
-  INPUT_CHOICES: ["Book", "Audiobook", "Podcast"],
+  INPUT_CHOICES: ["Non-fiction Book", "Audiobook"],
 
   // --- THE FIVE FIXED HABITS (same wording for everyone) -----------
   FIXED_HABITS: [
