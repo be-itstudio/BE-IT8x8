@@ -123,8 +123,8 @@
   .center{min-height:70vh; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; padding:20px}
   .center img.tl{width:82%; max-width:360px; margin:18px 0}
 
-  /* tick strike-through */
-  .hrow.on .lab{text-decoration:line-through; text-decoration-thickness:2px}
+  /* tick strike-through — daily home ticks only, not the setup picker */
+  .hrow.on:not(.pick) .lab{text-decoration:line-through; text-decoration-thickness:2px}
 
   /* day counter + view-card pill */
   .kick.daycount{font-size:14px; color:var(--dim); letter-spacing:1.5px; margin:0 0 10px}
