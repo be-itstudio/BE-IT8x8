@@ -12,7 +12,7 @@ window.CONFIG = {
   // --- CHALLENGE DATES (Sydney) ------------------------------------
   START_DATE:  "2026-09-17",   // TEST MODE — was 2026-10-12, revert before real members join
   END_DATE:    "2026-12-05",   // Sat — Day 55, final day
-  LOCK_DATE:   "2026-09-16",   // TEST MODE — was 2026-10-11, revert before real members join
+  LOCK_DATE:   "2026-09-24",   // TEST MODE — was 2026-10-11, revert before real members join
   TIMEZONE:    "Australia/Sydney",
   // Week 8 is a 6-day week (Mon 30 Nov – Sat 5 Dec); perfect-week bonus applies at 6/6.
 
