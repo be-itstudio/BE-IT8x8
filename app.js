@@ -661,7 +661,11 @@
     if (!HAS_DB) return showFront("Database not connected yet. (Add Supabase keys in config.js.)");
     const params = new URLSearchParams(location.search);
     if (params.has("admin")) return showAdmin();
-    if (params.has("join")) return showJoin();
+    if (params.has("join")) {
+      const codeParam = params.get("code");
+      if (codeParam && codeParam.toLowerCase() === String(C.JOIN_CODE).toLowerCase()) return renderOnboard();
+      return showJoin();
+    }
     let tok = params.get("m") || localStorage.getItem("b8_token");
     if (params.get("m")) { localStorage.setItem("b8_token", params.get("m")); history.replaceState(null, "", location.pathname); }
     if (!tok) return showFront();
