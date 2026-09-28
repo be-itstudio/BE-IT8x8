@@ -28,7 +28,7 @@
   })();
   const currentWeek = () => WEEKS.find(w => TODAY >= w.start && TODAY <= w.last) || null;
   const phase = TODAY < C.START_DATE ? "pre" : (TODAY > C.END_DATE ? "over" : "live");
-  const HABIT_KEYS = ["macros", "water", "move", "read", "input", "c1", "c2", "c3"];
+  const HABIT_KEYS = ["macros", "water", "move", "read", "input", "c1", "c2"];   // 7 daily habits; detox is weekly, tracked separately
   const DAY_INDEX = DAYS.indexOf(TODAY) + 1;                              // 1-based day-of-challenge, 0 if outside range
   const TOTAL_DAYS = DAYS.length;
 
@@ -42,7 +42,7 @@
     });
     WEEKS.forEach(w => {
       if (TODAY <= w.last) return;                                        // bonuses only at week close
-      if (w.days.every(d => perfect[d])) total += C.PERFECT_WEEK_BONUS;
+      if (w.days.every(d => perfect[d]) && detoxSet.has(w.start)) total += C.PERFECT_WEEK_BONUS;
       if (detoxSet.has(w.start)) total += C.DETOX_BONUS;
     });
     let streak = 0, d = perfect[TODAY] ? TODAY : addDays(TODAY, -1);
@@ -167,22 +167,19 @@
   }
 
   function renderOnboard() {
-    const act = C.ACTIVITY_LEVELS.map(a => `<option>${esc(a)}</option>`).join("");
+    const nut = C.NUTRITION_LEVELS.map(a => `<option>${esc(a)}</option>`).join("");
     const inp = C.INPUT_CHOICES.map(a => `<option>${esc(a)}</option>`).join("");
     $("#view-gate").innerHTML = `<div class="wrap" style="max-width:460px;margin:0 auto">
       <div class="eyebrow">Onboarding · one time</div>
       <div class="kick sm">Your details</div>
-      <p class="sub" style="margin:0 0 12px">Court uses your numbers to set your macros. You'll pick your habits and write your becoming statement in the app straight after.</p>
+      <p class="sub" style="margin:0 0 12px">You'll pick your habits and write your becoming statement in the app straight after.</p>
       <div class="card">
         <label class="fld"><span class="lb">Full name *</span><input class="txt" id="o_name"></label>
         <label class="fld"><span class="lb">Gender *</span><select class="txt" id="o_gender"><option value="">Choose…</option><option value="F">Female</option><option value="M">Male</option></select></label>
         <label class="fld"><span class="lb">Mobile *</span><input class="txt" id="o_phone" inputmode="tel"></label>
         <label class="fld"><span class="lb">Email</span><input class="txt" id="o_email" inputmode="email"></label>
-        <label class="fld"><span class="lb">Height *</span><input class="txt" id="o_height" placeholder="e.g. 178cm"></label>
-        <label class="fld"><span class="lb">Weight *</span><input class="txt" id="o_weight" placeholder="e.g. 82kg"></label>
-        <label class="fld"><span class="lb">Age *</span><input class="txt" id="o_age" inputmode="numeric"></label>
-        <label class="fld"><span class="lb">Activity level *</span><select class="txt" id="o_activity"><option value="">Choose…</option>${act}</select></label>
         <label class="fld"><span class="lb">Injuries or dietary restrictions</span><textarea class="txt" id="o_injuries" placeholder="Anything Court should know…"></textarea></label>
+        <label class="fld"><span class="lb">Nutrition approach *</span><select class="txt" id="o_nutrition"><option value="">Choose…</option>${nut}</select></label>
         <label class="fld" style="margin:0"><span class="lb">Your daily input *</span><select class="txt" id="o_input"><option value="">Choose…</option>${inp}</select></label>
       </div>
       <div class="card">
@@ -201,15 +198,14 @@
 
   async function submitOnboard() {
     const v = id => ($(id).value || "").trim();
-    const req = { name: "#o_name", gender: "#o_gender", phone: "#o_phone", height: "#o_height", weight: "#o_weight", age: "#o_age", activity: "#o_activity", input: "#o_input" };
+    const req = { name: "#o_name", gender: "#o_gender", phone: "#o_phone", nutrition: "#o_nutrition", input: "#o_input" };
     for (const k in req) if (!v(req[k])) { toast("Fill in all the * fields"); $(req[k]).focus(); return; }
     if ($("#o_agree").dataset.on !== "1") { toast("Please tick the 8-week sign-off"); return; }
     const btn = $("#onbGo"); btn.disabled = true; btn.textContent = "Creating…";
     const code = await uniqueCode();
     const m = await api.addMember({
       token: code, name: v("#o_name"), gender: v("#o_gender"), phone: v("#o_phone"), email: v("#o_email"),
-      height: v("#o_height"), weight: v("#o_weight"), age: v("#o_age"), activity: v("#o_activity"),
-      injuries: v("#o_injuries"), input_choice: v("#o_input"),
+      injuries: v("#o_injuries"), nutrition_level: v("#o_nutrition"), input_choice: v("#o_input"),
       photo_consent: $("#o_consent").dataset.on === "1", agreed: true, setup_complete: false,
     });
     if (!m) { btn.disabled = false; btn.textContent = "Create my account"; toast("⚠️ Couldn't save — check signal"); return; }
@@ -281,8 +277,9 @@
         <span class="cb">${on ? "✓" : ""}</span></div>`;
     }).join("");
     const fixedList = C.FIXED_HABITS.map(f => `<div class="hrow locked">
-        <span class="lab">${esc(f.label)}</span><span class="tag">everyone</span></div>`).join("");
-    const ready = s.b1 && s.b2 && s.b3 && s.habits.length === 3;
+        <span class="lab">${esc(fixedLabel(f, ME))}</span><span class="tag">everyone</span></div>`).join("")
+      + `<div class="hrow locked"><span class="lab">${esc(C.DETOX_LABEL)}</span><span class="tag">weekly</span></div>`;
+    const ready = s.b1 && s.b2 && s.b3 && s.habits.length === 2;
     $("#view-setup").innerHTML = `<div class="wrap">
       <div class="eyebrow">First launch · one time</div>
       <div class="kick">Create your<br>becoming statement</div>
@@ -296,14 +293,14 @@
       <div class="card">${preview}</div>
       <p class="sub" style="margin:10px 0 0">It locks on Sun 11 Oct — no edits after.</p>
 
-      <div class="kick sm" style="margin-top:24px">Choose your three</div>
-      <p class="sub" style="margin:0 0 8px">Everyone does the five. These three are your choice — daily, for eight weeks, locked the moment you submit.</p>
-      <p class="sub" style="margin:0 0 14px"><b>Choose the three that would change you. Not the three you could already tick today.</b></p>
-      <div class="divlab">The five everyone does</div>
+      <div class="kick sm" style="margin-top:24px">Choose your two</div>
+      <p class="sub" style="margin:0 0 8px">Six habits are set for everyone, listed below. These two are yours — on top of the six, every day for eight weeks.</p>
+      <p class="sub" style="margin:0 0 14px"><b>Choose the two that would change you. Not the two you could already tick today.</b></p>
+      <div class="divlab">Set for everyone</div>
       ${fixedList}
-      <div class="divlab">Your three</div>
+      <div class="divlab">Your two</div>
       ${habits}
-      <div class="note ${s.habits.length === 3 ? "" : "warn"}" id="pickcount" style="margin:10px 0 16px">${s.habits.length}/3 chosen</div>
+      <div class="note ${s.habits.length === 2 ? "" : "warn"}" id="pickcount" style="margin:10px 0 16px">${s.habits.length}/2 chosen</div>
 
       <button class="btn" id="setupSave" ${ready ? "" : "disabled"}>Lock it in</button>
     </div>`;
@@ -323,11 +320,11 @@
     if (act === "pick") node.onclick = () => {
       const i = +node.dataset.i, arr = setupState.habits, at = arr.indexOf(i);
       if (at >= 0) arr.splice(at, 1);
-      else { if (arr.length >= 3) { toast("Pick exactly 3"); return; } arr.push(i); }
+      else { if (arr.length >= 2) { toast("Pick exactly 2"); return; } arr.push(i); }
       const on = arr.includes(i);                                          // update in place — no re-render, no scroll jump
       node.classList.toggle("on", on);
       node.querySelector(".cb").textContent = on ? "✓" : "";
-      const pc = $("#pickcount"); if (pc) { pc.textContent = arr.length + "/3 chosen"; pc.classList.toggle("warn", arr.length !== 3); }
+      const pc = $("#pickcount"); if (pc) { pc.textContent = arr.length + "/2 chosen"; pc.classList.toggle("warn", arr.length !== 2); }
       renderPreviewOnly();
     };
   }
@@ -337,7 +334,7 @@
     if (card) card.innerHTML = (s.b1 || s.b2 || s.b3)
       ? `<div class="becoming" style="font-size:16px">I am someone who <b>${esc(s.b1 || "…")}</b>. I prove it by <b>${esc(s.b2 || "…")}</b>. I don't negotiate with <b>${esc(s.b3 || "…")}</b>.<span class="fixed">${esc(C.BECOMING_FIXED_LINE)}</span></div>`
       : `<p class="sub">Your statement builds here as you choose.</p>`;
-    const ready = s.b1 && s.b2 && s.b3 && s.habits.length === 3;
+    const ready = s.b1 && s.b2 && s.b3 && s.habits.length === 2;
     const sv = $("#setupSave"); if (sv) sv.disabled = !ready;
   }
   function confirmSetup() {
@@ -345,7 +342,7 @@
     const h = s.habits.map(i => C.CHOOSABLE_HABITS[i]);
     const msg = `Lock this in? No edits after.\n\nI am someone who ${s.b1}.\nI prove it by ${s.b2}.\nI don't negotiate with ${s.b3}.\n\nHabits:\n• ${h.join("\n• ")}`;
     if (!confirm(msg)) return;
-    const patch = { b1: s.b1, b2: s.b2, b3: s.b3, h1: h[0], h2: h[1], h3: h[2], setup_complete: true };
+    const patch = { b1: s.b1, b2: s.b2, b3: s.b3, h1: h[0], h2: h[1], h3: null, setup_complete: true };
     Object.assign(ME, patch);
     api.patchMember(ME.id, patch).then(ok => {
       if (!ok) { toast("⚠️ Not saved — check signal"); ME.setup_complete = false; return; }
@@ -354,11 +351,16 @@
   }
 
   // ================= HOME =================
-  const chosenLabels = m => [m.h1, m.h2, m.h3];
+  const chosenLabels = m => [m.h1, m.h2];
   function becomingHtml(m) {
     return `<div class="becoming">
       I am someone who <b>${esc(m.b1)}</b>. I prove it by <b>${esc(m.b2)}</b>. I don't negotiate with <b>${esc(m.b3)}</b>.
       <span class="fixed">${esc(C.BECOMING_FIXED_LINE)}</span></div>`;
+  }
+  function fixedLabel(f, m) {                                             // personalise "Eat whole food" / "input" with the member's chosen level
+    if (f.key === "macros" && m && m.nutrition_level) return f.label + " — " + m.nutrition_level;
+    if (f.key === "input" && m && m.input_choice) return f.label + " — " + m.input_choice;
+    return f.label;
   }
   function habitRow(field, label, on, locked) {
     return `<div class="hrow ${on ? "on" : ""} ${locked ? "locked" : ""}" ${locked ? "" : `data-act="tick" data-f="${field}"`}>
@@ -375,12 +377,12 @@
     const r = MY_DAYS[TODAY] || {};
     const editable = phase === "live";
     const sc = score(MY_DAYS, MY_DETOX);
-    const fixed = C.FIXED_HABITS.map(f => habitRow(f.key, f.label, !!r[f.key], !editable)).join("");
+    const fixed = C.FIXED_HABITS.map(f => habitRow(f.key, fixedLabel(f, ME), !!r[f.key], !editable)).join("");
     const chosen = chosenLabels(ME).map((lab, i) => habitRow("c" + (i + 1), lab, !!r["c" + (i + 1)], !editable)).join("");
     const cw = currentWeek();
     const detoxOn = cw ? MY_DETOX.has(cw.start) : false;
     const detox = cw ? `<div class="hrow ${detoxOn ? "on" : ""} ${editable ? "" : "locked"}" ${editable ? `data-act="detox"` : ""}>
-        <span class="lab">${esc(C.DETOX_LABEL)}<br><span class="tag">weekly bonus · +${C.DETOX_BONUS}</span></span>
+        <span class="lab">${esc(C.DETOX_LABEL)}<br><span class="tag">your 8th habit · +${C.DETOX_BONUS}</span></span>
         ${editable ? `<span class="cb">${detoxOn ? "✓" : ""}</span>` : `<span class="tag">closed</span>`}</div>` : "";
 
     const banner = phase === "pre"
@@ -403,7 +405,7 @@
 
       <div class="divlab">Today · tick to complete</div>
       ${fixed}
-      <div class="divlab">Your three</div>
+      <div class="divlab">Your two</div>
       ${chosen}
       ${detox ? `<div class="divlab">This week</div>${detox}` : ""}
     </div>`;
@@ -602,16 +604,14 @@
         ${F("e_name", "Full name", m.name)}
         <label class="fld"><span class="lb">Gender</span><select class="txt" id="e_gender">${opt(m.gender, ["F", "M"])}</select></label>
         ${F("e_phone", "Mobile", m.phone)}${F("e_email", "Email", m.email)}
-        ${F("e_height", "Height", m.height)}${F("e_weight", "Weight", m.weight)}${F("e_age", "Age", m.age)}
-        <label class="fld"><span class="lb">Activity</span><select class="txt" id="e_activity">${opt(m.activity, C.ACTIVITY_LEVELS)}</select></label>
         ${F("e_injuries", "Injuries / dietary", m.injuries, true)}
+        <label class="fld"><span class="lb">Nutrition approach</span><select class="txt" id="e_nutrition">${opt(m.nutrition_level, C.NUTRITION_LEVELS)}</select></label>
         <label class="fld" style="margin:0"><span class="lb">Daily input</span><select class="txt" id="e_input">${opt(m.input_choice, C.INPUT_CHOICES)}</select></label>
       </div>
       <div class="card">
         <div class="divlab" style="margin-top:0">Chosen habits</div>
         <label class="fld"><span class="lb">Habit 1</span><select class="txt" id="e_h1">${opt(m.h1, C.CHOOSABLE_HABITS)}</select></label>
-        <label class="fld"><span class="lb">Habit 2</span><select class="txt" id="e_h2">${opt(m.h2, C.CHOOSABLE_HABITS)}</select></label>
-        <label class="fld" style="margin:0"><span class="lb">Habit 3</span><select class="txt" id="e_h3">${opt(m.h3, C.CHOOSABLE_HABITS)}</select></label>
+        <label class="fld" style="margin:0"><span class="lb">Habit 2</span><select class="txt" id="e_h2">${opt(m.h2, C.CHOOSABLE_HABITS)}</select></label>
       </div>
       <div class="card">
         <div class="divlab" style="margin-top:0">Becoming statement</div>
@@ -627,23 +627,22 @@
       const v = id => ($(id).value || "").trim() || null;
       const patch = {
         name: v("#e_name") || m.name, gender: v("#e_gender"), phone: v("#e_phone"), email: v("#e_email"),
-        height: v("#e_height"), weight: v("#e_weight"), age: v("#e_age"), activity: v("#e_activity"),
-        injuries: v("#e_injuries"), input_choice: v("#e_input"),
-        h1: v("#e_h1"), h2: v("#e_h2"), h3: v("#e_h3"), b1: v("#e_b1"), b2: v("#e_b2"), b3: v("#e_b3"),
+        injuries: v("#e_injuries"), nutrition_level: v("#e_nutrition"), input_choice: v("#e_input"),
+        h1: v("#e_h1"), h2: v("#e_h2"), b1: v("#e_b1"), b2: v("#e_b2"), b3: v("#e_b3"),
       };
       const ok = await api.patchMember(m.id, patch);
       toast(ok ? "Saved ✓" : "⚠️ Not saved"); if (ok) renderAdmin();
     };
     $("#e_reset").onclick = async () => {
       if (!confirm("Reset " + m.name + "'s setup? They redo their habits + statement.")) return;
-      await api.patchMember(m.id, { setup_complete: false, h1: null, h2: null, h3: null, b1: null, b2: null, b3: null });
+      await api.patchMember(m.id, { setup_complete: false, h1: null, h2: null, b1: null, b2: null, b3: null });
       toast("Reset"); renderAdmin();
     };
   }
 
   function exportCSV(members) {
-    const cols = ["name", "gender", "phone", "email", "height", "weight", "age", "activity", "injuries", "input_choice", "photo_consent", "h1", "h2", "h3", "token", "setup_complete", "created_at"];
-    const head = ["Name", "Gender", "Phone", "Email", "Height", "Weight", "Age", "Activity", "Injuries/dietary", "Input", "Photo consent", "Habit 1", "Habit 2", "Habit 3", "Code", "Set up", "Joined"];
+    const cols = ["name", "gender", "phone", "email", "injuries", "nutrition_level", "input_choice", "photo_consent", "h1", "h2", "token", "setup_complete", "created_at"];
+    const head = ["Name", "Gender", "Phone", "Email", "Injuries/dietary", "Nutrition approach", "Input", "Photo consent", "Habit 1", "Habit 2", "Code", "Set up", "Joined"];
     const q = x => { x = (x == null ? "" : String(x)); return /[",\n]/.test(x) ? '"' + x.replace(/"/g, '""') + '"' : x; };
     const csv = [head.join(",")].concat(members.map(m => cols.map(c => q(m[c])).join(","))).join("\n");
     const a = document.createElement("a");

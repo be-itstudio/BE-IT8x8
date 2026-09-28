@@ -17,44 +17,47 @@ window.CONFIG = {
   // Week 8 is a 6-day week (Mon 30 Nov – Sat 5 Dec); perfect-week bonus applies at 6/6.
 
   // --- SCORING -----------------------------------------------------
-  POINTS_PER_TICK:   10,    // 8 habits ticked = 80/day
-  PERFECT_WEEK_BONUS: 200,  // all 8 habits, every day of a completed week
-  DETOX_BONUS:       100,   // weekly socials-detox tick
+  POINTS_PER_TICK:   10,    // 7 daily habits ticked = 70/day
+  PERFECT_WEEK_BONUS: 200,  // all 7 daily habits every day of the week, PLUS the detox tick that week
+  DETOX_BONUS:       100,   // weekly socials-detox tick (counts every week it's ticked, regardless of the rest)
 
   // --- OWNER TOOLS -------------------------------------------------
   OWNER_CODE: "beit8x8",    // unlock admin: members, links, edits, export
   JOIN_CODE:  "beit8x8",    // shared "door" code to start a self-onboarding signup
-  ACTIVITY_LEVELS: ["Sedentary", "Lightly active", "Moderately active", "Very active", "Athlete"],
+  NUTRITION_LEVELS: ["80/20", "90/10", "100% whole food"],
   INPUT_CHOICES: ["Non-fiction Book", "Audiobook"],
 
-  // --- THE FIVE FIXED HABITS (same wording for everyone) -----------
+  // --- THE FIVE DAILY FIXED HABITS (same wording for everyone) -----
+  // Socials detox is the 6th "set" habit but is weekly, not daily — handled separately, see DETOX_LABEL below.
   FIXED_HABITS: [
-    { key: "macros", label: "Hit your macros" },
+    { key: "macros", label: "Eat whole food" },
     { key: "water",  label: "Hit your water" },
     { key: "move",   label: "Move for 45 minutes" },
     { key: "read",   label: "Read your becoming statement" },
     { key: "input",  label: "Ten minutes of input" },
   ],
 
-  // --- THE MENU OF TEN (each member picks 3 at first launch) -------
+  // --- THE MENU OF TWELVE (each member picks 2 at first launch) ----
   CHOOSABLE_HABITS: [
     "No alcohol",
     "7+ hours sleep",
     "No food after 8pm",
     "No phone for the first 30 minutes of the day",
-    "No added sugar",
-    "Nothing with more than five ingredients on the label",
+    "No screens 30 minutes before bed",
+    "10 minutes of morning sunlight within 30 minutes of waking",
     "10,000 steps",
     "10 minutes mobility or stretching",
     "Three lines journalled",
+    "Five minutes of stillness — prayer, meditation or silence",
     "One message of encouragement to someone else",
+    "5 minutes of daily breathwork (app or guided)",
   ],
 
-  // --- THE WEEKLY BONUS -------------------------------------------
+  // --- THE WEEKLY DETOX (one of the eight habits, but weekly) ------
   DETOX_LABEL: "Socials detox — a full 24 hours off social media",
 
   // --- DAY-COMPLETE CARD --------------------------------------------
-  // Shown when all 8 habits are ticked for the day. One picked per day, in order, looping.
+  // Shown when all 7 daily habits are ticked for the day. One picked per day, in order, looping.
   COMPLETION_QUOTES: [
     "This is a commitment to a better you.",
     "Every action you take is a vote for who you want to become.",

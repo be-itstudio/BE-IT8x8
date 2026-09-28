@@ -9,33 +9,33 @@ create table if not exists b8_members (
   name text not null,
   gender text,                         -- M / F — BE-IT record + prize split, NOT shown on leaderboard
   avatar text,                         -- optional profile photo (small thumbnail URL)
-  -- onboarding form (self-serve, for BE-IT records + Court's macros) --
+  -- onboarding form (self-serve, for BE-IT records) --
   phone text, email text,
-  height text, weight text, age text, activity text,
   injuries text,                       -- injuries / dietary restrictions
-  input_choice text,                   -- Book / Audiobook / Podcast
+  nutrition_level text,                -- 80/20 / 90/10 / 100% whole food
+  input_choice text,                   -- Non-fiction Book / Audiobook
   photo_consent boolean default false, -- consent to use photos in marketing (never assumed)
   agreed boolean default false,        -- signed off: habits locked for 8 weeks
   -- in-app choices --
-  h1 text, h2 text, h3 text,           -- their 3 chosen habits (from the menu of 10)
+  h1 text, h2 text, h3 text,           -- their 2 chosen habits (from the menu of 12); h3 unused, kept for compatibility
   b1 text, b2 text, b3 text,           -- their becoming statement (3 chosen lines; line 4 is fixed in the app)
   setup_complete boolean default false,-- true once they finish first launch
   created_at timestamptz default now()
 );
 
 
--- DAYS: one row per member per day. 8 habit ticks (5 fixed + 3 chosen, positional).
+-- DAYS: one row per member per day. 7 daily habit ticks (5 fixed + 2 chosen, positional). Socials detox is weekly — see b8_detox.
 create table if not exists b8_days (
   member_id uuid references b8_members(id) on delete cascade,
   date date not null,
-  macros boolean default false,        -- fixed 1: Hit your macros
+  macros boolean default false,        -- fixed 1: Eat whole food
   water  boolean default false,        -- fixed 2: Hit your water
   move   boolean default false,        -- fixed 3: Move for 45 minutes
   read   boolean default false,        -- fixed 4: Read your becoming statement
   input  boolean default false,        -- fixed 5: Ten minutes of input
   c1 boolean default false,            -- chosen habit 1 (member.h1)
   c2 boolean default false,            -- chosen habit 2 (member.h2)
-  c3 boolean default false,            -- chosen habit 3 (member.h3)
+  c3 boolean default false,            -- unused, kept for compatibility
   updated_at timestamptz default now(),
   primary key (member_id, date)
 );

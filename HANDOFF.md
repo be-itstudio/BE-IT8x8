@@ -60,19 +60,21 @@ In `config.js` (change these from the defaults, then redeploy):
 **Members joining (self-serve, after they pay):**
 1. You send a paid client the app link + the join code.
 2. They tap **"I've paid — join"**, enter the join code, fill the onboarding form
-   (name, contact, height/weight/age/activity for Court, injuries, input choice, photo consent,
-   8-week sign-off).
+   (name, contact, injuries, nutrition approach, input choice, photo consent, 8-week sign-off).
 3. The app creates their account and gives them a **personal code** — that's how they log back in
    on any phone ("Find my account" + their code). It also logs them in on that phone straight away.
-4. They build their becoming statement, pick their 3 habits (locks 11 Oct), then tick daily.
+4. They build their becoming statement, pick their 2 habits (locks 11 Oct), then tick daily —
+   6 habits are set for everyone (5 daily + the weekly socials detox), plus their 2 chosen.
 
 **You (admin)** — go to `your-url/?admin`, enter your owner code:
 - Add members by hand (backup to self-serve), copy their links.
 - **Edit any member's details**, reset someone's setup, or delete them.
-- **Export CSV** — downloads everyone's details (height/weight/age/activity) for **Court to set macros.**
+- **Export CSV** — downloads everyone's details for BE-IT records.
 
-**Scoring** (all automatic): 10 points per habit tick (80/day), +200 a perfect week, +100 the
-weekly socials-detox tick. Leaderboard ranks on total points; streak = perfect days in a row.
+**Scoring** (all automatic): 10 points per daily habit tick (70/day across 7 daily habits), +100 the
+weekly socials-detox tick, +200 a perfect week (all 7 daily habits every day, plus that week's detox
+tick). Leaderboard ranks on total points; streak = consecutive days with all 7 daily habits ticked
+(the detox tick doesn't affect streak). Max possible score: 6,250.
 
 ---
 
