@@ -79,11 +79,12 @@ window.CONFIG = {
       </ul>
       <p>A free meal is <b>one meal, normal size.</b> Not a day, not a weekend. Alcohol counts as one — two drinks, one meal used. Used or lost, resets Monday.</p>
       <p>The best thing you can do is be honest about where you're currently at before deciding. You can always move up along the way.</p>` },
-    { title: "What our plates look like", body: `
-      <p>Not a formula. Just the shape we come back to.</p>
-      <p>Something with protein — meat, fish, eggs, yoghurt. Something that grew — veg, salad, fruit. Something that came out of the ground — rice, potatoes, oats. Fat you can name — olive oil, butter, avocado.</p>
+    { title: "How to build a plate", body: `
+      <p>Not a formula. Just the shape we come back to that helps keep it simple.</p>
+      <p>Something with protein — meat, chicken, fish, eggs, yoghurt. Something that grew — veg, salad, fruit. Something that came out of the ground — rice, potatoes, oats. Fat you can name — olive oil, butter, avocado.</p>
       <p>Eat until you're satisfied. Most of us have stopped noticing where that point is. Finding it again is part of the eight weeks.</p>
-      <p><b>Always fine:</b> coffee, tea, salt, herbs, spices, olive oil, butter, honey, protein powder, milk, yoghurt, cheese, tinned tomatoes, tinned fish, frozen veg, oats, rice, bread with five or fewer ingredients.</p>` },
+      <p><b>Always fine:</b> coffee, tea, salt, herbs, spices, olive oil, butter, honey, protein powder (in moderation), milk, yoghurt, cheese, tinned fish, frozen veg, oats, rice, bread with five or fewer ingredients.</p>
+      <p class="fuel-note"><i>Ask yourself: is this real food, or is it ultra-processed?</i></p>` },
     { title: "Become your own investigator", body: `
       <p>Nobody knows your body. Not us, not an app. The only way you find out what works is to pay attention — and most of us have outsourced that to a number on a screen.</p>
       <p>After a meal, ask:</p>
