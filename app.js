@@ -179,8 +179,12 @@
         <label class="fld"><span class="lb">Gender *</span><select class="txt" id="o_gender"><option value="">Choose…</option><option value="F">Female</option><option value="M">Male</option></select></label>
         <label class="fld"><span class="lb">Mobile *</span><input class="txt" id="o_phone" inputmode="tel"></label>
         <label class="fld"><span class="lb">Email</span><input class="txt" id="o_email" inputmode="email"></label>
-        <label class="fld"><span class="lb">Injuries or dietary restrictions</span><textarea class="txt" id="o_injuries" placeholder="Anything Court should know…"></textarea></label>
-        <label class="fld"><span class="lb">Nutrition approach *</span><select class="txt" id="o_nutrition"><option value="">Choose…</option>${nut}</select></label>
+        <label class="fld"><span class="lb">Injuries or dietary restrictions</span><textarea class="txt" id="o_injuries" placeholder="Anything your coaches should know…"></textarea></label>
+        <label class="fld">
+          <span class="lb">Nutrition approach *</span>
+          <p class="sub" style="margin:0 0 8px">Choose how you'll eat for the eight weeks. <b>80/20</b> = up to 4 free meals a week. <b>90/10</b> = up to 2. <b>100%</b> = whole food, every meal, no free meals. A free meal is one meal at normal size — not a day, not a weekend. You can move up mid-challenge, never down, and no level scores more than another.</p>
+          <select class="txt" id="o_nutrition"><option value="">Choose…</option>${nut}</select>
+        </label>
         <label class="fld" style="margin:0"><span class="lb">Your daily input *</span><select class="txt" id="o_input"><option value="">Choose…</option>${inp}</select></label>
       </div>
       <div class="card">
