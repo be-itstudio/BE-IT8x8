@@ -462,6 +462,7 @@
     const quotes = C.COMPLETION_QUOTES || [];
     const quote = quotes.length ? quotes[(DAY_INDEX - 1) % quotes.length] : "";
     $("#view-complete").innerHTML = `
+      <img class="bg-accent star" src="accent-star.png" alt="">
       <button class="cmpl-close" id="cmplClose">✕</button>
       <button class="cmpl-share" id="cmplShare">↑</button>
       <div class="cmpl-card" id="cmplCard">
