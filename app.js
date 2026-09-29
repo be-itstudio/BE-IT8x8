@@ -389,7 +389,7 @@
   function habitRow(field, label, on, locked) {
     return `<div class="hrow ${on ? "on" : ""} ${locked ? "locked" : ""}" ${locked ? "" : `data-act="tick" data-f="${field}"`}>
       <span class="lab">${esc(label)}</span>
-      ${locked ? `<span class="tag">${phase === "pre" ? "soon" : "closed"}</span>` : `<span class="cb">${on ? "✓" : ""}</span>`}
+      ${locked ? `<span class="tag">${phase === "pre" ? "daily" : "closed"}</span>` : `<span class="cb">${on ? "✓" : ""}</span>`}
     </div>`;
   }
   function renderHome() {
@@ -405,14 +405,16 @@
     const chosen = chosenLabels(ME).map((lab, i) => habitRow("c" + (i + 1), lab, !!r["c" + (i + 1)], !editable)).join("");
     const cw = currentWeek();
     const detoxOn = cw ? MY_DETOX.has(cw.start) : false;
-    const detox = cw ? `<div class="hrow ${detoxOn ? "on" : ""} ${editable ? "" : "locked"}" ${editable ? `data-act="detox"` : ""}>
+    const detox = `<div class="hrow ${detoxOn ? "on" : ""} ${editable ? "" : "locked"}" ${editable ? `data-act="detox"` : ""}>
         <span class="lab">${esc(C.DETOX_LABEL)}<br><span class="tag">your 8th habit · +${C.DETOX_BONUS}</span></span>
-        ${editable ? `<span class="cb">${detoxOn ? "✓" : ""}</span>` : `<span class="tag">closed</span>`}</div>` : "";
+        ${editable ? `<span class="cb">${detoxOn ? "✓" : ""}</span>` : `<span class="tag">${phase === "pre" ? "weekly" : "closed"}</span>`}</div>`;
 
     const banner = phase === "pre"
       ? `<div class="note lime" style="margin-bottom:12px">Challenge starts <b>Mon 12 Oct</b>. Read your statement daily — ticking for points opens on day one.</div>`
       : phase === "over"
         ? `<div class="note" style="margin-bottom:12px">Challenge complete. Final total below. 🖤</div>` : "";
+    const tip = phase === "pre"
+      ? `<div class="note lime" style="margin-top:16px">💡 <b>Tip:</b> don't wait for 12 Oct to start. Practice your habits now, plan ahead, and get organised — so you're ready to win from Day 1.</div>` : "";
     const dayComplete = HABIT_KEYS.every(k => !!r[k]);
 
     $("#view-home").innerHTML = `<div class="wrap">
@@ -431,7 +433,9 @@
       ${fixed}
       <div class="divlab">Your two</div>
       ${chosen}
-      ${detox ? `<div class="divlab">This week</div>${detox}` : ""}
+      <div class="divlab">${phase === "live" ? "This week" : "Weekly"}</div>
+      ${detox}
+      ${tip}
     </div>`;
     $("#view-home").querySelectorAll("[data-act]").forEach(bindHome);
     if ($("#viewCompleteBtn")) $("#viewCompleteBtn").onclick = renderCompleteCard;
