@@ -563,6 +563,7 @@
       <p class="sub" style="margin:0 0 16px">How we eat for the next eight weeks — no tracking, no points, just read when you need it.</p>
       ${sections}
       <p class="fuel-footer">${esc(C.FUEL_FOOTER)}</p>
+      <p style="text-align:center; margin-top:14px"><a href="/welcome" style="color:var(--dim); font-size:12px; text-decoration:underline">New here? Read the welcome guide</a></p>
     </div>`;
     $("#view-fuel").querySelectorAll('[data-act="acc"]').forEach(btn => {
       btn.onclick = () => btn.closest(".acc").classList.toggle("open");

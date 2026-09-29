@@ -1,0 +1,176 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, maximum-scale=1">
+<title>Welcome — BE-IT 8x8</title>
+<meta name="theme-color" content="#000000">
+<link rel="apple-touch-icon" href="icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#000; --panel:#0c0c0d; --panel2:#151517; --line:#282828; --line2:#3a3a3a;
+    --ink:#fff; --dim:#8c8c8c; --faint:#5c5c5c; --lime:#c9fd06;
+    --font:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    --display:"Anton",Impact,var(--font);
+  }
+  *{box-sizing:border-box; -webkit-tap-highlight-color:transparent}
+  html,body{margin:0; background:var(--bg); color:var(--ink); font-family:var(--font)}
+  body{max-width:640px; margin:0 auto}
+  img{max-width:100%; display:block}
+
+  header{padding:22px 20px 8px; text-align:center}
+  header img{height:52px; margin:0 auto}
+
+  .hero{padding:20px 20px 32px; text-align:center}
+  .hero h1{font-family:var(--display); text-transform:uppercase; transform:skewX(-7deg); font-size:46px; margin:0 0 8px; line-height:1}
+  .hero .sub{font-family:var(--display); text-transform:uppercase; transform:skewX(-7deg); font-size:19px; color:var(--lime); margin:0 0 16px}
+  .hero p{color:var(--dim); font-size:15px; line-height:1.6; max-width:420px; margin:0 auto}
+
+  section{padding:30px 20px; border-top:1px solid var(--line)}
+  section h2{font-family:var(--display); text-transform:uppercase; transform:skewX(-7deg); font-size:25px; line-height:1.08; margin:0 0 14px}
+  section p{font-size:15px; line-height:1.65; margin:0 0 14px; color:var(--ink)}
+  section p:last-child{margin-bottom:0}
+  b{font-weight:800}
+
+  ul.plain{margin:0 0 14px; padding-left:20px}
+  ul.plain li{font-size:15px; line-height:1.6; margin-bottom:8px}
+
+  blockquote{border-left:3px solid var(--lime); margin:0 0 16px; padding:2px 0 2px 16px; font-size:16px; line-height:1.75; font-style:italic; color:var(--ink)}
+  blockquote b{font-style:normal; color:var(--lime)}
+
+  .step{padding:34px 20px; border-top:1px solid var(--line)}
+  .step-head{display:flex; align-items:center; gap:12px; margin-bottom:18px}
+  .step-num{flex:0 0 auto; width:38px; height:38px; border-radius:50%; background:var(--lime); color:#000;
+    font-family:var(--display); font-size:19px; display:grid; place-items:center}
+  .step-head h2{margin:0; font-size:23px}
+
+  .video-slot{background:var(--panel2); border:1px dashed var(--line2); border-radius:14px; padding:36px 20px;
+    text-align:center; color:var(--faint); font-size:13px; margin-bottom:18px; line-height:1.6}
+
+  .btn{display:block; width:100%; text-align:center; appearance:none; border:1px solid var(--ink); background:var(--ink);
+    color:#000; font-weight:800; font-size:16px; padding:16px; border-radius:12px; text-decoration:none; letter-spacing:.3px}
+  .btn.ghost{background:var(--lime); border-color:var(--lime); color:#000}
+  .btn.disabled{background:var(--panel2); color:var(--faint); border-color:var(--line2); pointer-events:none}
+  .btn .small{display:block; font-size:11px; font-weight:600; text-transform:none; letter-spacing:0; margin-top:3px}
+
+  .howto{margin-top:20px; font-size:13px; color:var(--dim); line-height:1.7}
+  .howto .lb{color:var(--ink); font-weight:800; text-transform:uppercase; letter-spacing:1px; font-size:11px; display:block; margin:14px 0 4px}
+  .howto .lb:first-child{margin-top:0}
+
+  .dates{list-style:none; margin:0 0 18px; padding:0}
+  .dates li{padding:12px 0; border-bottom:1px solid var(--line); font-size:14px; line-height:1.5}
+  .dates li:last-child{border-bottom:0}
+  .dates li b{display:block; color:var(--lime); font-size:12px; text-transform:uppercase; letter-spacing:.5px; margin-bottom:3px}
+
+  .prize{background:var(--panel); border:1px solid var(--lime); border-radius:14px; padding:18px; text-align:center;
+    font-family:var(--display); text-transform:uppercase; transform:skewX(-7deg); font-size:19px; line-height:1.3}
+
+  footer{padding:34px 20px 60px; text-align:center; color:var(--faint); font-size:12px; line-height:1.8; border-top:1px solid var(--line)}
+  footer b{color:var(--dim)}
+</style>
+</head>
+<body>
+
+<header><img src="logo.png" alt="BE-IT 8x8"></header>
+
+<div class="hero">
+  <h1>You're in.</h1>
+  <div class="sub">8x8 starts Monday 12 October</div>
+  <p>Before you do anything else, read this page. It takes three minutes and it'll make the next eight weeks make sense.</p>
+</div>
+
+<section>
+  <h2>What you've just chosen</h2>
+  <p>We've stayed out of the challenge game for years, because most challenges sell you a before and after and hand you straight back to your old habits the day they finish.</p>
+  <p>This isn't that.</p>
+  <p>For eight weeks you're going to hold eight habits — and at the end of it you won't just look different, you'll have become someone who does these things. That's the part that lasts.</p>
+  <p><b>This isn't a chore. It's a choice.</b> Every day you tick those habits off, you're proving something to yourself about who you are. That's the whole point.</p>
+</section>
+
+<section>
+  <h2>What the eight weeks look like</h2>
+  <p><b>Six habits are set for everyone:</b></p>
+  <ul class="plain">
+    <li>Eat whole food</li>
+    <li>Hit your water — 3L women, 4L men</li>
+    <li>Move for 45 minutes</li>
+    <li>Read your becoming statement</li>
+    <li>Ten minutes of input — a non-fiction book or an audiobook</li>
+    <li>One 24-hour socials detox each week</li>
+  </ul>
+  <p><b>Two you choose yourself</b> — picked when you first open the app.</p>
+  <p>Eight habits. Every day. Fifty-five days.</p>
+  <p>You tick them off in the app, you earn points, and you'll see where you sit on the leaderboard against everyone else doing it with you — including your coaches, who are doing every single day of this alongside you.</p>
+</section>
+
+<section>
+  <h2>Your becoming statement</h2>
+  <p>This is the most important thing you'll do in these eight weeks, and it takes two minutes.</p>
+  <p>When you first open the app, you'll build a four-line statement. Something like:</p>
+  <blockquote>
+    I am someone who <b>keeps my word</b>.<br>
+    I prove it by <b>training when I don't feel like it</b>.<br>
+    I don't negotiate with <b>my own excuses</b>.<br>
+    <b>This is who I am. Not who I'm trying to be.</b>
+  </blockquote>
+  <p>You'll read it out loud every morning for 55 days.</p>
+  <p>Here's why it matters. You can force new habits for a few weeks through willpower alone — everyone can. What makes them stick is believing something different about yourself. The statement is the destination you're setting. Everything else is just you proving it's true.</p>
+  <p><b>Don't pick what's comfortable. Pick who you are choosing to become.</b></p>
+</section>
+
+<section>
+  <h2>What to expect</h2>
+  <p>We'd rather tell you the hard part now than have you quit in week one.</p>
+  <p><b>Days 1–5</b> are the hardest. If you've been eating a lot of packaged food, expect a headache, some tiredness, and thinking about food more than usual. Your body is adjusting. It passes.</p>
+  <p><b>Week 2</b> — it starts levelling out. The 3pm crash gets smaller.</p>
+  <p><b>Week 3 onwards</b> — this is where it clicks. Better sleep, better energy, and the habits stop feeling like decisions.</p>
+  <p>If week one is rough, you're not doing it wrong. You're doing it. And you won't be doing it alone.</p>
+</section>
+
+<div class="step">
+  <div class="step-head"><div class="step-num">1</div><h2>Get the app</h2></div>
+
+  <!-- VIDEO EMBED PLACEHOLDER — swap this whole div for Marty's video embed when ready -->
+  <div class="video-slot">🎥 Marty's explainer video goes here</div>
+
+  <a class="btn" href="/?join&amp;code=beit8x8">Open the app →</a>
+
+  <div class="howto">
+    <span class="lb">Add it to your home screen so it opens like a normal app</span>
+    <b>iPhone</b> — open the link in Safari, tap the share icon at the bottom, scroll down, tap <i>Add to Home Screen</i>.<br><br>
+    <b>Android</b> — open the link in Chrome, tap the three dots at the top right, tap <i>Add to Home Screen</i>.
+    <br><br>
+    You'll set up your becoming statement and choose your two habits when you first open it.
+  </div>
+</div>
+
+<div class="step">
+  <div class="step-head"><div class="step-num">2</div><h2>Join the group chat</h2></div>
+  <p style="font-size:15px; line-height:1.65; margin:0 0 18px">This is where the weekly drops, the coach check-ins and the meals we're all eating get posted. It's also where you'll get dragged through the days you don't feel like it.</p>
+
+  <!-- GROUP CHAT LINK — replace href="#" with the real link, remove class="disabled", update the label -->
+  <a class="btn disabled" href="#" target="_blank" rel="noopener">Join the group chat →<span class="small">Link coming soon</span></a>
+</div>
+
+<section>
+  <h2>Key dates</h2>
+  <ul class="dates">
+    <li><b>Sunday 11 October</b>Habits and becoming statements lock. No changes after this.</li>
+    <li><b>Monday 12 October</b>Day one. Before photos taken in the gym.</li>
+    <li><b>Wednesday 14 October</b>Last day to get your before photo if you missed Monday.</li>
+    <li><b>Saturday 5 December</b>Day 55. Christmas party, and we announce the winners.</li>
+  </ul>
+  <div class="prize">$500 for one man<br>$500 for one woman</div>
+  <p style="margin-top:12px; color:var(--dim); font-size:13px">Judged on consistency, transformation, and how you showed up.</p>
+</section>
+
+<footer>
+  <b>Bookmark this page.</b> You'll want it again.<br><br>
+  Questions? Ask any coach, or drop it in the group chat.
+</footer>
+
+</body>
+</html>
