@@ -225,7 +225,7 @@
         <div style="font-family:var(--display);font-size:40px;letter-spacing:3px">${esc(m.token)}</div>
         <div style="color:#444;font-size:11px;letter-spacing:2px;text-transform:uppercase">your code</div>
       </div>
-      <div class="note warn" style="margin:0 0 14px; text-align:center">⚠️ <b>Save this code now</b> — screenshot it or write it down. There's no email or password, so if you lose it, a BE-IT coach has to look it up for you.</div>
+      <div class="note lime" style="margin:0 0 14px; text-align:center">⚠️ <b>Save this code now</b> — screenshot it or write it down. There's no email or password, so if you lose it, a BE-IT coach has to look it up for you.</div>
       <button class="btn" id="wlGo">Next: build your statement →</button>
       <button class="btn ghost sm" id="wlCopy" style="margin-top:10px">Copy my private link</button>
     </div></div>`;
@@ -306,7 +306,7 @@
       ${fixedList}
       <div class="divlab">Your two</div>
       ${habits}
-      <div class="note ${s.habits.length === 2 ? "" : "warn"}" id="pickcount" style="margin:10px 0 16px">${s.habits.length}/2 chosen</div>
+      <div class="note ${s.habits.length === 2 ? "" : "lime"}" id="pickcount" style="margin:10px 0 16px">${s.habits.length}/2 chosen</div>
 
       <button class="btn" id="setupSave" ${ready ? "" : "disabled"}>Lock it in</button>
     </div>`;
@@ -330,7 +330,7 @@
       const on = arr.includes(i);                                          // update in place — no re-render, no scroll jump
       node.classList.toggle("on", on);
       node.querySelector(".cb").textContent = on ? "✓" : "";
-      const pc = $("#pickcount"); if (pc) { pc.textContent = arr.length + "/2 chosen"; pc.classList.toggle("warn", arr.length !== 2); }
+      const pc = $("#pickcount"); if (pc) { pc.textContent = arr.length + "/2 chosen"; pc.classList.toggle("lime", arr.length !== 2); }
       renderPreviewOnly();
     };
   }
