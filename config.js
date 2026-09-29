@@ -71,9 +71,14 @@ window.CONFIG = {
       <p>If week one is rough, you're not doing it wrong. You're doing it.</p>
       <p class="fuel-note"><i>If you feel more than mildly off, or it hasn't settled after a few days, chat to your coach / see your GP.</i></p>` },
     { title: "Your level", body: `
-      <p>Locked for eight weeks. <b>80/20</b> = 4 free meals a week. <b>90/10</b> = 2. <b>100%</b> = none.</p>
+      <p>Locked for eight weeks.</p>
+      <ul>
+        <li><b>80/20</b> = 4 free meals a week. Recommended if this is your first time intentionally eating whole foods.</li>
+        <li><b>90/10</b> = 2 free meals a week. Recommended if you're committed but still want to enjoy a meal out each week.</li>
+        <li><b>100%</b> = none. Fully committed to whole foods.</li>
+      </ul>
       <p>A free meal is <b>one meal, normal size.</b> Not a day, not a weekend. Alcohol counts as one — two drinks, one meal used. Used or lost, resets Monday.</p>
-      <p>You can move up mid-challenge. Not down. No level scores more than another.</p>` },
+      <p>The best thing you can do is be honest about where you're currently at before deciding. You can always move up along the way.</p>` },
     { title: "What our plates look like", body: `
       <p>Not a formula. Just the shape we come back to.</p>
       <p>Something with protein — meat, fish, eggs, yoghurt. Something that grew — veg, salad, fruit. Something that came out of the ground — rice, potatoes, oats. Fat you can name — olive oil, butter, avocado.</p>
