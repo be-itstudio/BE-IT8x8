@@ -167,20 +167,21 @@
     background:var(--panel2); color:var(--ink); display:grid; place-items:center; font-size:16px; cursor:pointer; padding:0; z-index:201}
   .cmpl-close{left:18px} .cmpl-share{right:18px}
   .cmpl-card{max-width:420px; width:100%; text-align:center; position:relative; z-index:1}
-  .cmpl-logo{height:24px; width:auto; margin:0 auto 8px}
-  .cmpl-title{font-family:var(--display); text-transform:uppercase; transform:skewX(-7deg); font-size:26px; line-height:1.05}
-  .cmpl-sub{font-family:var(--display); text-transform:uppercase; transform:skewX(-7deg); font-size:14px; color:var(--dim); margin-top:2px}
-  .cmpl-quote{font-size:13px; line-height:1.4; color:var(--ink); font-weight:600; font-style:italic; margin:12px 0 0; padding:0 10px}
-  .cmpl-grid{display:flex; flex-direction:column; gap:6px; margin-top:14px; align-items:center}
-  .cmpl-grid .wk{display:flex; gap:6px}
-  .cmpl-grid .d{width:26px; height:26px; border-radius:7px; border:1.5px solid var(--line2)}
+  .cmpl-logo{height:30px; width:auto; margin:0 auto 12px}
+  .cmpl-title{font-family:var(--display); text-transform:uppercase; transform:skewX(-7deg); font-size:32px; line-height:1.05}
+  .cmpl-sub{font-family:var(--display); text-transform:uppercase; transform:skewX(-7deg); font-size:16px; color:var(--dim); margin-top:2px}
+  .cmpl-quote{font-size:14px; line-height:1.5; color:var(--ink); font-weight:600; font-style:italic; margin:18px 0 0; padding:0 10px}
+  .cmpl-grid{display:flex; flex-direction:column; gap:8px; margin-top:20px; align-items:center}
+  .cmpl-grid .wk{display:flex; gap:8px}
+  .cmpl-grid .d{width:33px; height:33px; border-radius:8px; border:1.5px solid var(--line2)}
   .cmpl-grid .d.perfect{background:var(--lime); border-color:var(--lime)}
   .cmpl-grid .d.partial{background:#4a4a4a; border-color:#7a7a7a}
   .cmpl-grid .d.missed{background:transparent; border-color:var(--line2)}
   .cmpl-grid .d.future{background:transparent; border-color:var(--line2)}
   .cmpl-grid .d.today{box-shadow:0 0 0 2px var(--lime)}
-  .cmpl-foot{margin-top:12px; font-size:11px; color:var(--faint); text-transform:uppercase; letter-spacing:1.5px; font-weight:800}
-  #view-complete .bg-accent.star{position:fixed; top:-20px; right:-50px; width:190px; opacity:.1; pointer-events:none; z-index:0}
+  .cmpl-foot{margin-top:16px; font-size:11px; color:var(--faint); text-transform:uppercase; letter-spacing:1.5px; font-weight:800}
+  #view-complete .bg-accent.star{position:fixed; top:50%; left:50%; transform:translate(-50%,-50%);
+    width:420px; opacity:.08; pointer-events:none; z-index:0}
 </style>
 </head>
 <body>
