@@ -346,14 +346,30 @@
   function confirmSetup() {
     const s = setupState;
     const h = s.habits.map(i => C.CHOOSABLE_HABITS[i]);
-    const msg = `Lock this in? No edits after.\n\nI am someone who ${s.b1}.\nI prove it by ${s.b2}.\nI don't negotiate with ${s.b3}.\n\nHabits:\n• ${h.join("\n• ")}`;
-    if (!confirm(msg)) return;
-    const patch = { b1: s.b1, b2: s.b2, b3: s.b3, h1: h[0], h2: h[1], h3: null, setup_complete: true };
-    Object.assign(ME, patch);
-    api.patchMember(ME.id, patch).then(ok => {
-      if (!ok) { toast("⚠️ Not saved — check signal"); ME.setup_complete = false; return; }
-      toast("Locked in 🔒"); loadMineThen(renderHome);
-    });
+    const overlay = el(`<div class="lockconfirm-overlay">
+      <div class="lockconfirm-card">
+        <div class="kick sm">Lock this in?</div>
+        <p class="sub" style="margin:0 0 14px">No edits after this.</p>
+        <div class="becoming" style="font-size:15px; text-align:left; font-style:normal; margin-bottom:16px">
+          I am someone who <b>${esc(s.b1)}</b>. I prove it by <b>${esc(s.b2)}</b>. I don't negotiate with <b>${esc(s.b3)}</b>.
+        </div>
+        <div class="divlab" style="margin-top:0">Your two</div>
+        <p class="sub" style="margin:0 0 18px">${h.map(esc).join(" · ")}</p>
+        <button class="btn" id="lockYes">Yes, lock it in</button>
+        <button class="btn ghost sm" id="lockNo" style="margin-top:10px">← Go back, let me change something</button>
+      </div>
+    </div>`);
+    document.body.appendChild(overlay);
+    $("#lockNo").onclick = () => overlay.remove();
+    $("#lockYes").onclick = () => {
+      overlay.remove();
+      const patch = { b1: s.b1, b2: s.b2, b3: s.b3, h1: h[0], h2: h[1], h3: null, setup_complete: true };
+      Object.assign(ME, patch);
+      api.patchMember(ME.id, patch).then(ok => {
+        if (!ok) { toast("⚠️ Not saved — check signal"); ME.setup_complete = false; return; }
+        toast("Locked in 🔒"); loadMineThen(renderHome);
+      });
+    };
   }
 
   // ================= HOME =================
