@@ -410,7 +410,7 @@
         ${editable ? `<span class="cb">${detoxOn ? "✓" : ""}</span>` : `<span class="tag">closed</span>`}</div>` : "";
 
     const banner = phase === "pre"
-      ? `<div class="note warn" style="margin-bottom:12px">Challenge starts <b>Mon 12 Oct</b>. Read your statement daily — ticking for points opens on day one.</div>`
+      ? `<div class="note lime" style="margin-bottom:12px">Challenge starts <b>Mon 12 Oct</b>. Read your statement daily — ticking for points opens on day one.</div>`
       : phase === "over"
         ? `<div class="note" style="margin-bottom:12px">Challenge complete. Final total below. 🖤</div>` : "";
     const dayComplete = HABIT_KEYS.every(k => !!r[k]);
