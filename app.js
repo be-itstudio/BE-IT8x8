@@ -717,8 +717,6 @@
     if (b.dataset.tab === "fuel") return renderFuel();
     renderHome();
   });
-  $("#adminBtn").onclick = () => showAdmin();
-
   function loadMineThen(fn) { Promise.all([api.daysFor(ME.id), api.detoxFor(ME.id)]).then(([d, x]) => { MY_DAYS = d; MY_DETOX = x; fn(); }); }
 
   async function boot() {
