@@ -91,9 +91,36 @@ window.CONFIG = {
       </ul>
       <p>Try eating at the same times each day, sitting down, phone face down. Same food, different experience.</p>
       <p class="fuel-note"><i>If food starts feeling stressful or all-consuming, tell a coach. That's what we're here for.</i></p>` },
-    { title: "Meals we love", body: `
-      <p>Meal ideas coming soon — we'll drop 8–10 go-to combos here.</p>
-      <p>Posted in the group chat weekly too. Steal freely.</p>` },
+    { title: "Food Combos we love", body: `
+      <p><b>Breakfast</b></p>
+      <ul>
+        <li>Eggs, sourdough, butter, sauerkraut, kiwi fruit</li>
+        <li>Eggs, avocado, tomato, sourdough</li>
+        <li>Oats, Greek yoghurt, berries, honey</li>
+        <li>Egg omelette, spinach, mushrooms, fetta, roast pumpkin</li>
+      </ul>
+      <p><b>Mains</b></p>
+      <ul>
+        <li>Grilled chicken, roasted sweet potato, avocado, rocket/spinach</li>
+        <li>Steak, sweet potato, greens, butter</li>
+        <li>Beef mince, sweet potato, pickles, spinach</li>
+        <li>Salmon, roast pumpkin or potatoes, broccolini, lemon</li>
+        <li>Warm salad: roasted beetroot, feta, walnut and chicken or lamb</li>
+        <li>Chicken thighs, rice, roasted capsicum and zucchini, olive oil</li>
+        <li>Slow-cooked lamb, potatoes, carrots, greens</li>
+        <li>Baked white fish, rice, salad, avocado</li>
+        <li>Chicken/turkey mince, bone broth rice, peas and corn</li>
+      </ul>
+      <p><b>Quick and snacks</b></p>
+      <ul>
+        <li>Greek yoghurt, berries, kiwi, honey or maple</li>
+        <li>Wholegrain rice cakes, avocado, tuna</li>
+        <li>Sourdough, avocado, tuna, salt and pepper</li>
+        <li>Boiled eggs, cheese, pickles</li>
+        <li>Greek yoghurt, banana, nuts, honey</li>
+        <li>Dates, peanut butter, sea salt</li>
+      </ul>
+      <p>Keep an eye in the group chat to see more combos that your coaches love and get some inspo.</p>` },
     { title: "Beyond the eight weeks", body: `
       <p>Eight weeks is long enough for this to stop being something you're doing and start being how you eat.</p>
       <p>By December you'll have your own data — what makes you feel good, what flattens you, what happens when you sleep and eat well at the same time. Nobody can take that off you.</p>
