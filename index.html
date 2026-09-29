@@ -74,6 +74,7 @@
     border-radius:12px; padding:13px 14px; margin-bottom:8px; cursor:pointer; transition:.12s}
   .hrow.on{background:#fff; border-color:#fff; color:#000}
   .hrow.on .cb{background:#000; border-color:#000; color:#fff}
+  .lime-star{color:var(--lime)}
   .hrow .lab{flex:1; min-width:0; font-weight:700; font-size:15px}
   .hrow .cb{flex:0 0 auto; width:28px; height:28px; border-radius:8px; border:2px solid var(--line2);
     display:grid; place-items:center; font-size:16px; font-weight:900; color:transparent}
@@ -123,8 +124,15 @@
   .center{min-height:70vh; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; padding:20px}
   .center img.tl{width:82%; max-width:360px; margin:18px 0}
 
+  /* subtle brand accent graphics */
+  .accent-wrap{position:relative; overflow:hidden}
+  .accent-wrap > *:not(.bg-accent){position:relative; z-index:1}
+  .bg-accent{position:absolute; z-index:0; pointer-events:none; opacity:.1; max-width:none}
+  .bg-accent.star{width:200px; top:-20px; right:-50px}
+  .bg-accent.streaky{width:220px; bottom:-15px; right:-30px}
+
   /* tick strike-through — daily home ticks only, not the setup picker */
-  .hrow.on:not(.pick) .lab{text-decoration:line-through; text-decoration-thickness:2px}
+  .hrow.on:not(.pick) .lab{text-decoration:line-through; text-decoration-thickness:2px; text-decoration-color:var(--lime)}
 
   /* day counter + view-card pill */
   .kick.daycount{font-size:14px; color:var(--dim); letter-spacing:1.5px; margin:0 0 10px}

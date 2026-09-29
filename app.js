@@ -133,7 +133,8 @@
   const myLink = tok => location.origin + location.pathname.replace(/index\.html$/, "") + "?m=" + tok;
 
   function showFront(msg) {
-    $("#view-gate").innerHTML = `<div class="center">
+    $("#view-gate").innerHTML = `<div class="center accent-wrap">
+      <img class="bg-accent star" src="accent-star.png" alt="">
       <img class="tl" src="welcome.png" alt="BE-IT 8x8 — Choosing Transformation">
       ${msg ? `<div class="note warn" style="max-width:340px;margin-bottom:14px">${esc(msg)}</div>` : ""}
       <div class="card" style="max-width:340px; width:100%">
@@ -400,7 +401,7 @@
 
       <div class="stat">
         <div class="b"><div class="n pts">${sc.total}</div><div class="l">Points</div></div>
-        <div class="b"><div class="n pts">${sc.streak}${sc.streak ? " 🔥" : ""}</div><div class="l">Day streak</div></div>
+        <div class="b"><div class="n pts">${sc.streak}${sc.streak ? ' <span class="lime-star">★</span>' : ""}</div><div class="l">Day streak</div></div>
       </div>
 
       <div class="divlab">Today · tick to complete</div>
@@ -417,7 +418,7 @@
     const sc = score(MY_DAYS, MY_DETOX);
     const ns = document.querySelectorAll("#view-home .stat .n");
     if (ns[0]) ns[0].textContent = sc.total;
-    if (ns[1]) ns[1].textContent = sc.streak + (sc.streak ? " 🔥" : "");
+    if (ns[1]) ns[1].innerHTML = sc.streak + (sc.streak ? ' <span class="lime-star">★</span>' : "");
   }
   function paintRow(node, on) { node.classList.toggle("on", on); const cb = node.querySelector(".cb"); if (cb) cb.textContent = on ? "✓" : ""; }
   function bindHome(node) {
@@ -463,7 +464,7 @@
         <div class="cmpl-sub">Choosing Transformation</div>
         ${quote ? `<div class="cmpl-quote">“${esc(quote)}”</div>` : ""}
         <div class="cmpl-grid">${completeGridHtml()}</div>
-        <div class="cmpl-foot">${sc.streak ? sc.streak + " day streak 🔥 · " : ""}${sc.total} points</div>
+        <div class="cmpl-foot">${sc.streak ? sc.streak + ' day streak <span class="lime-star">★</span> · ' : ""}${sc.total} points</div>
       </div>`;
     $("#view-complete").classList.remove("hide");
     $("#cmplClose").onclick = () => $("#view-complete").classList.add("hide");
@@ -508,8 +509,9 @@
       <td><span class="rankmed">${medal(i)}</span></td>
       <td>${esc(m.name)}</td>
       <td class="num">${m.pts}</td>
-      <td class="num">${m.streak ? m.streak + " 🔥" : "–"}</td></tr>`).join("");
-    $("#view-board").innerHTML = `<div class="wrap">
+      <td class="num">${m.streak ? m.streak + ' <span class="lime-star">★</span>' : "–"}</td></tr>`).join("");
+    $("#view-board").innerHTML = `<div class="wrap accent-wrap">
+      <img class="bg-accent streaky" src="accent-8x8.png" alt="">
       <div class="eyebrow">Choosing transformation</div>
       <div class="kick">Leaderboard</div>
       <p class="sub" style="margin:0 0 12px">Ranked on total points. Streak is bragging rights, not ranked.</p>
