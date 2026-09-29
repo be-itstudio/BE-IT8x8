@@ -124,7 +124,7 @@
   }
 
   // ---------- state ----------
-  let ME = null, MY_DAYS = {}, MY_DETOX = new Set(), OWNER = false;
+  let ME = null, MY_DAYS = {}, MY_DETOX = new Set(), OWNER = false, cameFromWelcome = false;
 
   // ================= FRONT DOOR (join / find / onboard) =================
   const CODE_ALPHABET = "ABCDEFGHJKMNPQRSTUVWXYZ23456789";                 // no ambiguous 0/O/1/I/L
@@ -197,7 +197,7 @@
     show("gate");
     const tog = id => { const n = $(id); n.onclick = () => { const on = n.dataset.on !== "1"; n.dataset.on = on ? "1" : "0"; n.classList.toggle("on", on); n.querySelector(".cb").textContent = on ? "✓" : ""; }; };
     tog("#o_consent"); tog("#o_agree");
-    $("#onbBack").onclick = () => showJoin();
+    $("#onbBack").onclick = () => { if (cameFromWelcome) { location.href = "/welcome"; } else { showJoin(); } };
     $("#onbGo").onclick = submitOnboard;
   }
 
@@ -726,7 +726,7 @@
     if (params.has("admin")) return showAdmin();
     if (params.has("join")) {
       const codeParam = params.get("code");
-      if (codeParam && codeParam.toLowerCase() === String(C.JOIN_CODE).toLowerCase()) return renderOnboard();
+      if (codeParam && codeParam.toLowerCase() === String(C.JOIN_CODE).toLowerCase()) { cameFromWelcome = true; return renderOnboard(); }
       return showJoin();
     }
     let tok = params.get("m") || localStorage.getItem("b8_token");
