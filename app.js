@@ -362,8 +362,10 @@
       I am someone who <b>${esc(m.b1)}</b>. I prove it by <b>${esc(m.b2)}</b>. I don't negotiate with <b>${esc(m.b3)}</b>.
       <span class="fixed">${esc(C.BECOMING_FIXED_LINE)}</span></div>`;
   }
-  function fixedLabel(f, m) {                                             // personalise "Eat whole food" / "input" with the member's chosen level
+  function fixedLabel(f, m) {                                             // personalise habits with the member's chosen level / gender
     if (f.key === "macros" && m && m.nutrition_level) return f.label + " — " + m.nutrition_level;
+    if (f.key === "water" && m && m.gender === "F") return "Drink 3L water";
+    if (f.key === "water" && m && m.gender === "M") return "Drink 4L water";
     if (f.key === "input" && m && m.input_choice) return f.label + " — " + m.input_choice;
     return f.label;
   }
