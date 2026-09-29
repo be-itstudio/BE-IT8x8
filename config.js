@@ -22,7 +22,7 @@ window.CONFIG = {
   DETOX_BONUS:       100,   // weekly socials-detox tick (counts every week it's ticked, regardless of the rest)
 
   // --- OWNER TOOLS -------------------------------------------------
-  OWNER_CODE: "beit8x8",    // unlock admin: members, links, edits, export
+  OWNER_CODE: "2323",       // unlock admin: members, links, edits, export
   JOIN_CODE:  "beit8x8",    // shared "door" code to start a self-onboarding signup
   NUTRITION_LEVELS: ["80/20", "90/10", "100% whole food"],
   INPUT_CHOICES: ["Non-fiction Book", "Audiobook"],
