@@ -181,8 +181,8 @@
         <label class="fld"><span class="lb">Email</span><input class="txt" id="o_email" inputmode="email"></label>
         <label class="fld"><span class="lb">Injuries or dietary restrictions</span><textarea class="txt" id="o_injuries" placeholder="Anything your coaches should know…"></textarea></label>
         <label class="fld">
-          <span class="lb">Nutrition approach *</span>
-          <p class="sub" style="margin:0 0 8px">Choose how you'll eat for the eight weeks. <b>80/20</b> = up to 4 free meals a week. <b>90/10</b> = up to 2. <b>100%</b> = whole food, every meal, no free meals. A free meal is one meal at normal size — not a day, not a weekend. You can move up mid-challenge, never down, and no level scores more than another.</p>
+          <span class="lb">Whole food approach *</span>
+          <p class="sub" style="margin:0 0 8px">This challenge is built on eating <b>whole, real food — not ultra-processed.</b> The percentage below is how strictly. <b>80/20</b> = up to 4 free meals a week. <b>90/10</b> = up to 2. <b>100%</b> = whole food, every meal, no free meals. A free meal is one meal at normal size — not a day, not a weekend. You can move up mid-challenge, never down, and no level scores more than another.</p>
           <select class="txt" id="o_nutrition"><option value="">Choose…</option>${nut}</select>
         </label>
         <label class="fld" style="margin:0"><span class="lb">Your daily input *</span><select class="txt" id="o_input"><option value="">Choose…</option>${inp}</select></label>
@@ -220,11 +220,12 @@
   function showWelcome(m) {
     $("#view-gate").innerHTML = `<div class="center"><div class="card" style="max-width:360px;width:100%">
       <div class="kick sm">You're in, ${esc((m.name || "").split(" ")[0])} 🖤</div>
-      <p class="sub" style="margin:0 0 12px">This is your personal code — it's how you log back in on any phone. Screenshot it.</p>
-      <div class="card" style="text-align:center;background:#fff;color:#000;margin:0 0 14px">
+      <p class="sub" style="margin:0 0 12px">This is your personal code — it's how you log back in on any phone.</p>
+      <div class="card" style="text-align:center;background:#fff;color:#000;margin:0 0 10px">
         <div style="font-family:var(--display);font-size:40px;letter-spacing:3px">${esc(m.token)}</div>
         <div style="color:#444;font-size:11px;letter-spacing:2px;text-transform:uppercase">your code</div>
       </div>
+      <div class="note warn" style="margin:0 0 14px; text-align:center">⚠️ <b>Save this code now</b> — screenshot it or write it down. There's no email or password, so if you lose it, a BE-IT coach has to look it up for you.</div>
       <button class="btn" id="wlGo">Next: build your statement →</button>
       <button class="btn ghost sm" id="wlCopy" style="margin-top:10px">Copy my private link</button>
     </div></div>`;
