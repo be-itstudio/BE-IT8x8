@@ -122,9 +122,10 @@ window.CONFIG = {
       </ul>
       <p>Keep an eye in the group chat to see more combos that your coaches love and get some inspo.</p>` },
     { title: "Beyond the eight weeks", body: `
-      <p>Eight weeks is long enough for this to stop being something you're doing and start being how you eat.</p>
-      <p>By December you'll have your own data — what makes you feel good, what flattens you, what happens when you sleep and eat well at the same time. Nobody can take that off you.</p>
-      <p>Then you add things back on your terms. That's the difference between a diet and a standard.</p>
+      <p>Eight weeks is long enough to build a new habit. This isn't a short-term fix, and it's not about getting a bit fit just for the challenge.</p>
+      <p>It's about building the data — what makes you feel good, what helps you sleep better, what actually leaves you energised instead of flat. That's what becoming your own investigator gets you. Nobody can take that off you.</p>
+      <p>Once you have it, you add things back on your terms. But the foundation stays — whole food that fuels you well.</p>
+      <p>Every tick is a vote for who you're becoming. This eight weeks is just the start of unlocking feeling your best.</p>
       <p class="fuel-final"><b>You are someone who fuels themselves well. You're not trying to become that person — you're proving you already are.</b></p>` },
   ],
   FUEL_FOOTER: "General information only, not nutritional or medical advice. We're sharing how we eat — real food instead of ultra-processed food. If you're pregnant, on medication or managing a health condition, check with your doctor first.",
