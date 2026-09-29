@@ -131,6 +131,25 @@
   .bg-accent.star{width:200px; top:-20px; right:-50px}
   .bg-accent.streaky{width:220px; bottom:-15px; right:-30px}
 
+  /* fuel tab — accordion */
+  .acc{background:var(--panel); border:1px solid var(--line); border-radius:14px; margin-bottom:10px; overflow:hidden}
+  .acc-h{width:100%; text-align:left; background:none; border:0; color:var(--ink); font-family:var(--display);
+    text-transform:uppercase; transform:skewX(-7deg); font-size:17px; padding:16px; cursor:pointer;
+    display:flex; justify-content:space-between; align-items:center; gap:10px}
+  .acc-x{font-family:var(--font); transform:skewX(7deg); font-size:22px; font-weight:300; color:var(--dim);
+    transition:transform .15s; flex:0 0 auto; line-height:1}
+  .acc.open .acc-x{transform:skewX(7deg) rotate(45deg)}
+  .acc-b{max-height:0; overflow:hidden; transition:max-height .25s ease}
+  .acc.open .acc-b{max-height:2400px}
+  .acc-b .inner{padding:0 16px 16px; transform:skewX(0)}
+  .acc-b p{margin:0 0 12px; font-size:14px; line-height:1.6; color:var(--ink)}
+  .acc-b p:last-child{margin-bottom:0}
+  .acc-b ul{margin:0 0 12px; padding-left:20px}
+  .acc-b li{font-size:14px; line-height:1.6; margin-bottom:6px}
+  .fuel-note{color:var(--dim)}
+  .fuel-final{font-style:italic}
+  .fuel-footer{color:var(--faint); font-size:11px; line-height:1.6; margin:18px 0 0; padding-top:14px; border-top:1px solid var(--line)}
+
   /* tick strike-through — daily home ticks only, not the setup picker */
   .hrow.on:not(.pick) .lab{text-decoration:line-through; text-decoration-thickness:2px; text-decoration-color:var(--lime)}
 
@@ -173,12 +192,14 @@
   <div id="view-setup"  class="hide"></div>
   <div id="view-home"   class="hide"></div>
   <div id="view-board"  class="hide"></div>
+  <div id="view-fuel"   class="hide"></div>
   <div id="view-admin"  class="hide"></div>
   <div id="view-complete" class="hide"></div>
 
   <nav class="tabs hide" id="tabs">
     <button data-tab="home" class="on"><span class="i">🏠</span>Today</button>
     <button data-tab="board"><span class="i">🏆</span>Leaderboard</button>
+    <button data-tab="fuel"><span class="i">🥗</span>Fuel</button>
   </nav>
 
   <div class="toast" id="toast">Saved</div>

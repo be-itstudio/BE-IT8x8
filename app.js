@@ -113,10 +113,10 @@
   };
 
   // ---------- view switching ----------
-  const VIEWS = ["gate", "setup", "home", "board", "admin"];
+  const VIEWS = ["gate", "setup", "home", "board", "fuel", "admin"];
   function show(v) {
     VIEWS.forEach(x => $("#view-" + x).classList.toggle("hide", x !== v));
-    const inApp = (v === "home" || v === "board");
+    const inApp = (v === "home" || v === "board" || v === "fuel");
     $("#tabs").classList.toggle("hide", !inApp);
     $("#logoImg").classList.toggle("hide", false);
     if (inApp) document.querySelectorAll("nav.tabs button").forEach(b => b.classList.toggle("on", b.dataset.tab === v));
@@ -522,6 +522,26 @@
     </div>`;
   }
 
+  // ================= FUEL (static, read-only) =================
+  function renderFuel() {
+    const sections = C.FUEL_SECTIONS.map((s, i) => `
+      <div class="acc" data-i="${i}">
+        <button class="acc-h" data-act="acc">${esc(s.title)}<span class="acc-x">+</span></button>
+        <div class="acc-b"><div class="inner">${s.body}</div></div>
+      </div>`).join("");
+    $("#view-fuel").innerHTML = `<div class="wrap">
+      <div class="eyebrow">Choosing transformation</div>
+      <div class="kick">Fuel</div>
+      <p class="sub" style="margin:0 0 16px">How we eat for the next eight weeks — no tracking, no points, just read when you need it.</p>
+      ${sections}
+      <p class="fuel-footer">${esc(C.FUEL_FOOTER)}</p>
+    </div>`;
+    $("#view-fuel").querySelectorAll('[data-act="acc"]').forEach(btn => {
+      btn.onclick = () => btn.closest(".acc").classList.toggle("open");
+    });
+    show("fuel");
+  }
+
   // ================= ADMIN =================
   const randTok = () => Math.random().toString(36).slice(2, 8);
   const linkFor = tok => location.origin + location.pathname.replace(/index\.html$/, "") + "?m=" + tok;
@@ -664,7 +684,11 @@
   }
 
   // ---------- boot ----------
-  document.querySelectorAll("nav.tabs button").forEach(b => b.onclick = () => { b.dataset.tab === "board" ? renderBoard() : renderHome(); });
+  document.querySelectorAll("nav.tabs button").forEach(b => b.onclick = () => {
+    if (b.dataset.tab === "board") return renderBoard();
+    if (b.dataset.tab === "fuel") return renderFuel();
+    renderHome();
+  });
   $("#adminBtn").onclick = () => showAdmin();
 
   function loadMineThen(fn) { Promise.all([api.daysFor(ME.id), api.detoxFor(ME.id)]).then(([d, x]) => { MY_DAYS = d; MY_DETOX = x; fn(); }); }

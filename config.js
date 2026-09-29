@@ -56,6 +56,52 @@ window.CONFIG = {
   // --- THE WEEKLY DETOX (one of the eight habits, but weekly) ------
   DETOX_LABEL: "Socials detox — a full 24 hours off social media",
 
+  // --- FUEL TAB (static, read-only — nothing here is tracked or scored) ---
+  FUEL_SECTIONS: [
+    { title: "Why real food", body: `
+      <p>Most of what fills a supermarket was built in a factory to be eaten fast and eaten again. It's the reason a lot of us feel flat, foggy, and hungry an hour after eating.</p>
+      <p>Real food does the opposite. It fills you up, and it gives your body what it needs to recover, sleep and think clearly.</p>
+      <p>No counting. No weighing. No scanning. For eight weeks you eat food that looks like food, and you pay attention to what it does to you.</p>
+      <p><b>The rule:</b> nothing out of a packet with more than five ingredients.</p>` },
+    { title: "What to expect", body: `
+      <p>We're telling you this up front so you don't think something's gone wrong.</p>
+      <p><b>Days 1–5</b> are the hard bit. Headaches, tiredness, thinking about food more than usual. Your body is adjusting. It passes.</p>
+      <p><b>Week 2</b> — energy levels out. The 3pm crash shrinks.</p>
+      <p><b>Week 3 on</b> — this is where most people go <i>oh</i>. Sleep's better. You're not hungry an hour after eating. Cooking has become a habit instead of a decision.</p>
+      <p>If week one is rough, you're not doing it wrong. You're doing it.</p>
+      <p class="fuel-note"><i>If you feel more than mildly off, or it hasn't settled after a few days, see your GP.</i></p>` },
+    { title: "Your level", body: `
+      <p>Locked for eight weeks. <b>80/20</b> = 4 free meals a week. <b>90/10</b> = 2. <b>100%</b> = none.</p>
+      <p>A free meal is <b>one meal, normal size.</b> Not a day, not a weekend. Alcohol counts as one — two drinks, one meal used. Used or lost, resets Monday.</p>
+      <p>You can move up mid-challenge. Not down. No level scores more than another.</p>` },
+    { title: "What our plates look like", body: `
+      <p>Not a formula. Just the shape we come back to.</p>
+      <p>Something with protein — meat, fish, eggs, yoghurt. Something that grew — veg, salad, fruit. Something that came out of the ground — rice, potatoes, oats. Fat you can name — olive oil, butter, avocado.</p>
+      <p>Eat until you're satisfied. Most of us have stopped noticing where that point is. Finding it again is part of the eight weeks.</p>
+      <p><b>Always fine:</b> coffee, tea, salt, herbs, spices, olive oil, butter, honey, protein powder, milk, yoghurt, cheese, tinned tomatoes, tinned fish, frozen veg, oats, rice, bread with five or fewer ingredients.</p>` },
+    { title: "Become your own investigator", body: `
+      <p>Nobody knows your body. Not us, not an app. The only way you find out what works is to pay attention — and most of us have outsourced that to a number on a screen.</p>
+      <p>After a meal, ask:</p>
+      <ul>
+        <li>How do I feel an hour from now?</li>
+        <li>Was that enough, or am I already thinking about the next thing?</li>
+        <li>Did I eat that sitting down, or standing up on my phone?</li>
+        <li>How did I sleep after the way I ate yesterday?</li>
+        <li>Was I hungry, or was I tired, bored or stressed?</li>
+      </ul>
+      <p>Try eating at the same times each day, sitting down, phone face down. Same food, different experience.</p>
+      <p class="fuel-note"><i>If food starts feeling stressful or all-consuming, tell a coach. That's what we're here for.</i></p>` },
+    { title: "Meals we love", body: `
+      <p>Meal ideas coming soon — we'll drop 8–10 go-to combos here.</p>
+      <p>Posted in the group chat weekly too. Steal freely.</p>` },
+    { title: "Beyond the eight weeks", body: `
+      <p>Eight weeks is long enough for this to stop being something you're doing and start being how you eat.</p>
+      <p>By December you'll have your own data — what makes you feel good, what flattens you, what happens when you sleep and eat well at the same time. Nobody can take that off you.</p>
+      <p>Then you add things back on your terms. That's the difference between a diet and a standard.</p>
+      <p class="fuel-final"><b>You are someone who fuels themselves well. You're not trying to become that person — you're proving you already are.</b></p>` },
+  ],
+  FUEL_FOOTER: "General information only, not nutritional or medical advice. We're sharing how we eat — real food instead of ultra-processed food. If you're pregnant, on medication or managing a health condition, check with your doctor first.",
+
   // --- DAY-COMPLETE CARD --------------------------------------------
   // Shown when all 7 daily habits are ticked for the day. One picked per day, in order, looping.
   COMPLETION_QUOTES: [
