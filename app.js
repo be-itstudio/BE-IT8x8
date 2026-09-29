@@ -38,7 +38,7 @@
     DAYS.forEach(d => {
       const r = daysMap[d]; if (!r) { perfect[d] = false; return; }
       const n = HABIT_KEYS.reduce((a, k) => a + (r[k] ? 1 : 0), 0);
-      total += n * C.POINTS_PER_TICK; perfect[d] = (n === 8);
+      total += n * C.POINTS_PER_TICK; perfect[d] = (n === HABIT_KEYS.length);
     });
     WEEKS.forEach(w => {
       if (TODAY <= w.last) return;                                        // bonuses only at week close
@@ -444,7 +444,7 @@
   function dayStatus(iso) {
     if (iso > TODAY) return "future";
     const n = dayHabitCount(iso);
-    return n === 8 ? "perfect" : n > 0 ? "partial" : "missed";
+    return n === HABIT_KEYS.length ? "perfect" : n > 0 ? "partial" : "missed";
   }
   function completeGridHtml() {
     return WEEKS.map(w => `<div class="wk">${w.days.map(d =>
@@ -459,7 +459,7 @@
       <button class="cmpl-share" id="cmplShare">↑</button>
       <div class="cmpl-card" id="cmplCard">
         <img class="cmpl-logo" src="logo.png" alt="BE-IT 8x8">
-        <div class="cmpl-title">Day ${DAY_INDEX} complete</div>
+        <div class="cmpl-title">Day ${DAY_INDEX}/${TOTAL_DAYS} complete</div>
         <div class="cmpl-sub">Choosing Transformation</div>
         ${quote ? `<div class="cmpl-quote">“${esc(quote)}”</div>` : ""}
         <div class="cmpl-grid">${completeGridHtml()}</div>
@@ -583,7 +583,12 @@
       const txt = members.map(m => m.name + " — code " + m.token + " — " + linkFor(m.token)).join("\n");
       try { await navigator.clipboard.writeText(txt); toast("All links copied"); } catch (e) { toast("Copy failed"); }
     };
-    const ex = $("#exportcsv"); if (ex) ex.onclick = () => exportCSV(members);
+    const ex = $("#exportcsv"); if (ex) ex.onclick = async () => {
+      ex.disabled = true; ex.textContent = "Exporting…";
+      const [days, detox] = await Promise.all([api.allDays(), api.allDetox()]);
+      exportCSV(members, days, detox);
+      ex.disabled = false; ex.textContent = "Export CSV";
+    };
     $("#olock").onclick = () => { localStorage.removeItem("b8_owner"); showAdmin(); };
     $("#view-admin").querySelectorAll("[data-act]").forEach(node => {
       const act = node.dataset.act;
@@ -640,13 +645,19 @@
     };
   }
 
-  function exportCSV(members) {
-    const cols = ["name", "gender", "phone", "email", "injuries", "nutrition_level", "input_choice", "photo_consent", "h1", "h2", "token", "setup_complete", "created_at"];
-    const head = ["Name", "Gender", "Phone", "Email", "Injuries/dietary", "Nutrition approach", "Input", "Photo consent", "Habit 1", "Habit 2", "Code", "Set up", "Joined"];
+  function exportCSV(members, days, detox) {
+    const cols = ["name", "gender", "phone", "email", "injuries", "nutrition_level", "input_choice", "photo_consent", "h1", "h2", "token", "setup_complete", "points", "streak", "perfect_days", "created_at"];
+    const head = ["Name", "Gender", "Phone", "Email", "Injuries/dietary", "Nutrition approach", "Input", "Photo consent", "Habit 1", "Habit 2", "Code", "Set up", "Points", "Streak", "Perfect days", "Joined"];
     const q = x => { x = (x == null ? "" : String(x)); return /[",\n]/.test(x) ? '"' + x.replace(/"/g, '""') + '"' : x; };
-    const csv = [head.join(",")].concat(members.map(m => cols.map(c => q(m[c])).join(","))).join("\n");
+    const rows = members.map(m => {
+      const sc = score(days[m.id] || {}, detox[m.id] || new Set());
+      const perfectDays = Object.values(sc.perfect).filter(Boolean).length;
+      const row = { ...m, points: sc.total, streak: sc.streak, perfect_days: perfectDays };
+      return cols.map(c => q(row[c])).join(",");
+    });
+    const csv = [head.join(",")].concat(rows).join("\n");
     const a = document.createElement("a");
-    a.href = URL.createObjectURL(new Blob([csv], { type: "text/csv" })); a.download = "beit-8x8-members.csv"; a.click();
+    a.href = URL.createObjectURL(new Blob([csv], { type: "text/csv" })); a.download = "beit-8x8-members-" + TODAY + ".csv"; a.click();
     toast("Exported");
   }
 
