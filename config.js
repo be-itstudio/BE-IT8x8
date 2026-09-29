@@ -59,17 +59,17 @@ window.CONFIG = {
   // --- FUEL TAB (static, read-only — nothing here is tracked or scored) ---
   FUEL_SECTIONS: [
     { title: "Why real food", body: `
-      <p>Most of what fills a supermarket was built in a factory to be eaten fast and eaten again. It's the reason a lot of us feel flat, foggy, and hungry an hour after eating.</p>
+      <p>Most of what fills a supermarket — or our own pantry — was built in a factory to be eaten fast and eaten again. It's the reason a lot of us feel flat, foggy, and hungry an hour after eating.</p>
       <p>Real food does the opposite. It fills you up, and it gives your body what it needs to recover, sleep and think clearly.</p>
       <p>No counting. No weighing. No scanning. For eight weeks you eat food that looks like food, and you pay attention to what it does to you.</p>
-      <p><b>The rule:</b> nothing out of a packet with more than five ingredients.</p>` },
+      <p><b>The rule:</b> nothing out of a packet with more than five ingredients. Real food.</p>` },
     { title: "What to expect", body: `
       <p>We're telling you this up front so you don't think something's gone wrong.</p>
       <p><b>Days 1–5</b> are the hard bit. Headaches, tiredness, thinking about food more than usual. Your body is adjusting. It passes.</p>
-      <p><b>Week 2</b> — energy levels out. The 3pm crash shrinks.</p>
-      <p><b>Week 3 on</b> — this is where most people go <i>oh</i>. Sleep's better. You're not hungry an hour after eating. Cooking has become a habit instead of a decision.</p>
+      <p><b>Week 2</b> — energy levels out. The 3pm crash shrinks. Consistency is everything here.</p>
+      <p><b>Week 3 on</b> — this is where most people go <i>ohhh</i>. Sleep's better. You're not hungry an hour after eating. Cooking has become a habit. A lot of inflammation starts to disappear here.</p>
       <p>If week one is rough, you're not doing it wrong. You're doing it.</p>
-      <p class="fuel-note"><i>If you feel more than mildly off, or it hasn't settled after a few days, see your GP.</i></p>` },
+      <p class="fuel-note"><i>If you feel more than mildly off, or it hasn't settled after a few days, chat to your coach / see your GP.</i></p>` },
     { title: "Your level", body: `
       <p>Locked for eight weeks. <b>80/20</b> = 4 free meals a week. <b>90/10</b> = 2. <b>100%</b> = none.</p>
       <p>A free meal is <b>one meal, normal size.</b> Not a day, not a weekend. Alcohol counts as one — two drinks, one meal used. Used or lost, resets Monday.</p>
