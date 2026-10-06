@@ -58,6 +58,11 @@ window.CONFIG = {
 
   // --- FUEL TAB (static, read-only — nothing here is tracked or scored) ---
   FUEL_SECTIONS: [
+    { title: "Rewatch Marty's welcome video", body: `
+      <div class="video-wrap">
+        <iframe src="https://www.loom.com/embed/a0116259ed704175b6d885deab1eb381" title="Marty's welcome video"
+          allowfullscreen webkitallowfullscreen mozallowfullscreen loading="lazy"></iframe>
+      </div>` },
     { title: "Why real food", body: `
       <p>Most of what fills a supermarket — or our own pantry — was built in a factory to be eaten fast and eaten again. It's the reason a lot of us feel flat, foggy, and hungry an hour after eating.</p>
       <p>Real food does the opposite. It fills you up, and it gives your body what it needs to recover, sleep and think clearly.</p>
