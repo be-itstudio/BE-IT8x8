@@ -47,8 +47,9 @@
     font-family:var(--display); font-size:19px; display:grid; place-items:center}
   .step-head h2{margin:0; font-size:23px}
 
-  .video-slot{background:var(--panel2); border:1px dashed var(--line2); border-radius:14px; padding:36px 20px;
-    text-align:center; color:var(--faint); font-size:13px; margin-bottom:18px; line-height:1.6}
+  .video-wrap{position:relative; width:100%; padding-top:56.25%; border-radius:14px; overflow:hidden;
+    background:var(--panel2); border:1px solid var(--line2); margin-bottom:18px}
+  .video-wrap iframe{position:absolute; inset:0; width:100%; height:100%; border:0}
 
   .btn{display:block; width:100%; text-align:center; appearance:none; border:1px solid var(--ink); background:var(--ink);
     color:#000; font-weight:800; font-size:16px; padding:16px; border-radius:12px; text-decoration:none; letter-spacing:.3px}
@@ -133,8 +134,10 @@
 <div class="step">
   <div class="step-head"><div class="step-num">1</div><h2>Get the app</h2></div>
 
-  <!-- VIDEO EMBED PLACEHOLDER — swap this whole div for Marty's video embed when ready -->
-  <div class="video-slot">🎥 Marty's explainer video goes here</div>
+  <div class="video-wrap">
+    <iframe src="https://www.loom.com/embed/a0116259ed704175b6d885deab1eb381" title="Marty's explainer video"
+      allowfullscreen webkitallowfullscreen mozallowfullscreen loading="lazy"></iframe>
+  </div>
 
   <a class="btn" href="/?join&amp;code=beit8x8">Open the app →</a>
 
