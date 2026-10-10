@@ -53,6 +53,10 @@
   // ---------- api ----------
   const H = () => ({ apikey: C.SUPABASE_ANON_KEY, Authorization: "Bearer " + C.SUPABASE_ANON_KEY, "Content-Type": "application/json" });
   const api = {
+    async contactList() {
+      const r = await fetch(REST + "/b8_members?select=phone,email", { headers: H() });
+      return r.ok ? r.json() : [];
+    },
     async memberByToken(tok) {
       const r = await fetch(REST + "/b8_members?select=*&token=eq." + encodeURIComponent(tok), { headers: H() });
       const rows = r.ok ? await r.json() : []; return rows[0] || null;
@@ -201,12 +205,32 @@
     $("#onbGo").onclick = submitOnboard;
   }
 
+  const normPhone = p => { let d = (p || "").replace(/\D/g, ""); if (d.startsWith("61") && d.length === 11) d = "0" + d.slice(2); return d; };
+  async function alreadySignedUp(phone, email) {
+    try {
+      const np = normPhone(phone), ne = (email || "").trim().toLowerCase();
+      const list = await api.contactList();
+      return list.some(m => (np && normPhone(m.phone) === np) || (ne && (m.email || "").trim().toLowerCase() === ne));
+    } catch (e) { return false; }                                          // never block signup if the check itself fails
+  }
   async function submitOnboard() {
     const v = id => ($(id).value || "").trim();
     const req = { name: "#o_name", gender: "#o_gender", phone: "#o_phone", nutrition: "#o_nutrition", input: "#o_input" };
     for (const k in req) if (!v(req[k])) { toast("Fill in all the * fields"); $(req[k]).focus(); return; }
     if ($("#o_agree").dataset.on !== "1") { toast("Please tick the 8-week sign-off"); return; }
     const btn = $("#onbGo"); btn.disabled = true; btn.textContent = "Creating…";
+    const dupe = await alreadySignedUp(v("#o_phone"), v("#o_email"));
+    if (dupe) {
+      btn.disabled = false; btn.textContent = "Create my account";
+      const old = $("#dupeNote"); if (old) old.remove();
+      btn.insertAdjacentHTML("beforebegin", `<div class="note warn" id="dupeNote" style="margin-bottom:12px">
+        <b>You've already signed up with these details.</b> Tap "Find my account" and enter the code you saved.
+        Lost it? Message a BE-IT coach and they'll look it up.
+        <div style="margin-top:10px"><button class="btn ghost sm" id="dupeFind">Find my account</button></div></div>`);
+      $("#dupeFind").onclick = showFind;
+      $("#dupeNote").scrollIntoView({ block: "center" });
+      return;
+    }
     const code = await uniqueCode();
     const m = await api.addMember({
       token: code, name: v("#o_name"), gender: v("#o_gender"), phone: v("#o_phone"), email: v("#o_email"),
