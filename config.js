@@ -12,7 +12,7 @@ window.CONFIG = {
   // --- CHALLENGE DATES (Sydney) ------------------------------------
   START_DATE:  "2026-10-12",   // Mon — Day 1, ticking for points begins
   END_DATE:    "2026-12-05",   // Sat — Day 55, final day
-  LOCK_DATE:   "2026-10-11",   // Sun — becoming statement + chosen habits lock (no edits after)
+  LOCK_DATE:   "2026-12-05",   // SIGNUPS OPEN until this date (set to a real date to close new setups). Members lock themselves in when they tap "Lock it in".
   TIMEZONE:    "Australia/Sydney",
   // Week 8 is a 6-day week (Mon 30 Nov – Sat 5 Dec); perfect-week bonus applies at 6/6.
 

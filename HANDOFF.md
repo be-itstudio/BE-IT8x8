@@ -63,7 +63,7 @@ In `config.js` (change these from the defaults, then redeploy):
    (name, contact, injuries, nutrition approach, input choice, photo consent, 8-week sign-off).
 3. The app creates their account and gives them a **personal code** — that's how they log back in
    on any phone ("Find my account" + their code). It also logs them in on that phone straight away.
-4. They build their becoming statement, pick their 2 habits (locks 11 Oct), then tick daily —
+4. They build their becoming statement, pick their 2 habits (they lock when the member taps "Lock it in"; new setups stay open until LOCK_DATE in config.js), then tick daily —
    6 habits are set for everyone (5 daily + the weekly socials detox), plus their 2 chosen.
 
 **You (admin)** — go to `your-url/?admin`, enter your owner code:

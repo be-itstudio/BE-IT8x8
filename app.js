@@ -321,7 +321,7 @@
         ${lineBlock(3, C.BECOMING_LINE3)}
       </div>
       <div class="card">${preview}</div>
-      <p class="sub" style="margin:10px 0 0">It locks on Sun 11 Oct — no edits after.</p>
+      <p class="sub" style="margin:10px 0 0">Once you lock it in, there are no edits.</p>
 
       <div class="kick sm" style="margin-top:24px">Choose your two</div>
       <p class="sub" style="margin:0 0 8px">Six habits are set for everyone, listed below. These two are yours — on top of the six, every day for eight weeks.</p>
@@ -417,9 +417,10 @@
     </div>`;
   }
   function renderHome() {
+    if (dateChanged()) { location.reload(); return; }
     if (!ME.setup_complete) {
       $("#view-home").innerHTML = `<div class="wrap"><div class="card"><div class="kick sm">Not set up</div>
-        <p class="sub">Your becoming statement and habits weren't locked in before Sun 11 Oct. Grab a BE-IT coach — they can set it for you.</p></div></div>`;
+        <p class="sub">Setup is closed and your becoming statement and habits weren't locked in. Grab a BE-IT coach — they can help.</p></div></div>`;
       show("home"); return;
     }
     const r = MY_DAYS[TODAY] || {};
@@ -743,6 +744,15 @@
     renderHome();
   });
   function loadMineThen(fn) { Promise.all([api.daysFor(ME.id), api.detoxFor(ME.id)]).then(([d, x]) => { MY_DAYS = d; MY_DETOX = x; fn(); }); }
+
+  // "Today" is worked out when the page loads, so a phone left open overnight would keep yesterday's date.
+  // Reload when the Sydney date has changed — but only on the main screens, never mid-form.
+  const dateChanged = () => ymd(sydNow()) !== TODAY;
+  const onMainScreen = () => ["home", "board", "fuel"].some(v => !$("#view-" + v).classList.contains("hide")) && $("#view-complete").classList.contains("hide");
+  const refreshIfNewDay = () => { if (document.visibilityState === "visible" && dateChanged() && onMainScreen()) location.reload(); };
+  document.addEventListener("visibilitychange", refreshIfNewDay);
+  window.addEventListener("pageshow", refreshIfNewDay);
+  setInterval(refreshIfNewDay, 60000);
 
   async function boot() {
     if (!HAS_DB) return showFront("Database not connected yet. (Add Supabase keys in config.js.)");
