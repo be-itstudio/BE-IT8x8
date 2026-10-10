@@ -475,6 +475,7 @@
   function bindHome(node) {
     const act = node.dataset.act;
     if (act === "tick") node.onclick = async () => {                       // toggle in place — page stays put
+      if (dateChanged()) { location.reload(); return; }                    // midnight passed while open: reload so the tick lands on the right day
       const f = node.dataset.f; const r = MY_DAYS[TODAY] || (MY_DAYS[TODAY] = { member_id: ME.id, date: TODAY });
       const nv = !r[f]; r[f] = nv; paintRow(node, nv); updateHomeStats();
       const ok = await api.tick(ME.id, TODAY, f, nv);
@@ -482,6 +483,7 @@
       if (nv && HABIT_KEYS.every(k => !!r[k])) { renderCompleteCard(); renderHome(); }
     };
     if (act === "detox") node.onclick = async () => {
+      if (dateChanged()) { location.reload(); return; }
       const cw = currentWeek(); if (!cw) return;
       const on = !MY_DETOX.has(cw.start);
       if (on) MY_DETOX.add(cw.start); else MY_DETOX.delete(cw.start);
