@@ -41,7 +41,6 @@
       total += n * C.POINTS_PER_TICK; perfect[d] = (n === HABIT_KEYS.length);
     });
     WEEKS.forEach(w => {
-      if (TODAY <= w.last) return;                                        // bonuses only at week close
       if (w.days.every(d => perfect[d]) && detoxSet.has(w.start)) total += C.PERFECT_WEEK_BONUS;
       if (detoxSet.has(w.start)) total += C.DETOX_BONUS;
     });
